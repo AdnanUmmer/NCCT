@@ -11,8 +11,8 @@ if not SECRET_KEY:
     if not DEBUG:
         raise ImproperlyConfigured('Set DJANGO_SECRET_KEY, or DJANGO_DEBUG=1 for local development.')
     SECRET_KEY = secrets.token_urlsafe(50)
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-CSRF_TRUSTED_ORIGINS = list(filter(None, os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',')))
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
 SITE_URL = os.environ.get('SITE_URL', 'https://ncctdxb.com').rstrip('/')
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
@@ -52,7 +52,10 @@ SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SSL_REDIRECT', '0' if DEBUG else '1
 SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_HSTS_SECONDS', '0' if DEBUG else '31536000'))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_PRELOAD = not DEBUG
-if os.environ.get('DJANGO_TRUST_PROXY_SSL') == '1':
+# Render terminates TLS before forwarding requests to Django. Recognise the
+# original scheme so SecurityMiddleware does not redirect HTTPS back to itself.
+# Retain the explicit opt-in for other trusted reverse-proxy deployments.
+if os.environ.get('RENDER') == 'true' or os.environ.get('DJANGO_TRUST_PROXY_SSL') == '1':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ENQUIRY_MIN_SECONDS = 3
 ENQUIRY_RATE_LIMIT = 10
