@@ -3,6 +3,11 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.templatetags.static import static
 
+class HomepageSeedState(models.Model):
+    """One-time initialization receipt, committed atomically with starter data."""
+    key = models.CharField(max_length=80, primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 class ImageContent(models.Model):
     image = models.ImageField(upload_to='homepage/%Y/%m/', blank=True,
         validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp', 'avif'])])

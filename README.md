@@ -77,6 +77,8 @@ Use the upload field for replacements; `static_image` is the basename of a bundl
 
 SQLite is the local default. Set `DATABASE_URL=postgresql://user:password@host:5432/database` for PostgreSQL, then run `manage.py migrate` and `manage.py seed_homepage`. PostgreSQL support is configured but was not exercised against a live PostgreSQL server. Seeding is idempotent and preserves administrator edits.
 
+For Render, set **Build Command** to `bash build.sh`. It installs dependencies, runs migrations, initializes homepage content, then collects static assets. Use the same persistent `DATABASE_URL` for build and runtime. See [Render deployment instructions](docs/RENDER-DEPLOYMENT.md), including SQLite limitations. Seeding now records a one-time initialization receipt; subsequent runs do not re-create renamed/deleted entries or reset admin publication choices. Existing populated sections are preserved on the first run too.
+
 | Variable | Purpose |
 | --- | --- |
 | `DJANGO_SECRET_KEY` | Required outside development; generate a unique secret, never commit it |
