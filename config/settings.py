@@ -48,14 +48,17 @@ SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
-SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SSL_REDIRECT', '0' if DEBUG else '1') == '1'
+# Render enforces HTTPS at its edge. Do not redirect again inside Django,
+# even if an older deployment still sets DJANGO_SSL_REDIRECT=1.
+ON_RENDER = os.environ.get('RENDER') == 'true'
+SECURE_SSL_REDIRECT = False if ON_RENDER else os.environ.get('DJANGO_SSL_REDIRECT', '0' if DEBUG else '1') == '1'
 SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_HSTS_SECONDS', '0' if DEBUG else '31536000'))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_PRELOAD = not DEBUG
 # Render terminates TLS before forwarding requests to Django. Recognise the
 # original scheme so SecurityMiddleware does not redirect HTTPS back to itself.
 # Retain the explicit opt-in for other trusted reverse-proxy deployments.
-if os.environ.get('RENDER') == 'true' or os.environ.get('DJANGO_TRUST_PROXY_SSL') == '1':
+if ON_RENDER or os.environ.get('DJANGO_TRUST_PROXY_SSL') == '1':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ENQUIRY_MIN_SECONDS = 3
 ENQUIRY_RATE_LIMIT = 10

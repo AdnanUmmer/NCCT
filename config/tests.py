@@ -31,7 +31,8 @@ class RenderConfigurationTests(SimpleTestCase):
         config = load_settings(RENDER='true', DJANGO_ALLOWED_HOSTS='ncct.onrender.com, design.theadvoxy.com,',
             DJANGO_CSRF_TRUSTED_ORIGINS='https://ncct.onrender.com, https://design.theadvoxy.com,')
         self.assertEqual(config['SECURE_PROXY_SSL_HEADER'], ('HTTP_X_FORWARDED_PROTO', 'https'))
-        self.assertTrue(config['SECURE_SSL_REDIRECT'])
+        self.assertFalse(config['SECURE_SSL_REDIRECT'])
+        self.assertFalse(load_settings(RENDER='true', DJANGO_SSL_REDIRECT='1')['SECURE_SSL_REDIRECT'])
         self.assertEqual(config['ALLOWED_HOSTS'], ['ncct.onrender.com', 'design.theadvoxy.com'])
         self.assertEqual(config['CSRF_TRUSTED_ORIGINS'], ['https://ncct.onrender.com', 'https://design.theadvoxy.com'])
 
@@ -58,8 +59,11 @@ class RenderConfigurationTests(SimpleTestCase):
             for host in hosts:
                 with self.subTest(host=host):
                     response = client.get('/probe/', HTTP_HOST=host, HTTP_X_FORWARDED_PROTO='http')
-                    self.assertEqual(response.status_code, 301)
-                    self.assertEqual(response['Location'], f'https://{host}/probe/')
+                    self.assertEqual(response.status_code, 200)
+                    self.assertNotIn('Location', response)
+                    response = client.get('/probe/', HTTP_HOST=host)
+                    self.assertEqual(response.status_code, 200)
+                    self.assertNotIn('Location', response)
                     response = client.get('/probe/', HTTP_HOST=host, HTTP_X_FORWARDED_PROTO='https')
                     self.assertEqual(response.status_code, 200)
                     self.assertTrue(response.json()['secure'])
