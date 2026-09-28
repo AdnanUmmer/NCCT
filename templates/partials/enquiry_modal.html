@@ -1,0 +1,17 @@
+<dialog class="enquiry-drawer" id="enquiry" aria-labelledby="enquiry-heading" data-errors="{{ form_error|yesno:'true,false' }}">
+  <div class="drawer-header"><span class="eyebrow">NCCT DXB / Project enquiry</span><button type="button" class="close-button" data-close aria-label="Close enquiry">×</button></div>
+  <div class="drawer-content"><p class="eyebrow">A conversation about light</p><h2 id="enquiry-heading">Tell us about<br>your space.</h2><p class="drawer-intro">Share a few details and our team can get in touch.<br>Fields marked * are required.</p>
+  <form action="{% url 'enquiry' %}" method="post" id="enquiry-form">
+    {% csrf_token %}{{ form.token }}
+    <div class="honeypot" aria-hidden="true"><label for="id_website">Leave this field empty</label>{{ form.website }}</div>
+    <div class="form-errors" id="form-errors" role="alert" tabindex="-1">{% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}</div>
+    <div class="form-grid">{% for field in form.visible_fields %}{% if field.name != 'website' and field.name != 'consent' %}<div class="field {% if field.name == 'message' or field.name == 'project_type' %}field-wide{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <span aria-hidden="true">*</span>{% endif %}</label>{{ field }}<span class="field-error" id="error-{{ field.name }}">{% for error in field.errors %}{{ error }}{% endfor %}</span></div>{% endif %}{% endfor %}</div>
+    <div class="consent-field">{{ form.consent }}<label for="id_consent">{{ form.consent.label }}</label></div><span class="field-error" id="error-consent">{{ form.consent.errors|striptags }}</span>
+    <p class="form-note">Your details are saved securely for the NCCT team to review this enquiry.</p>
+    <button class="button button-navy submit-button" type="submit">Send enquiry <span aria-hidden="true">↗</span></button><p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="enquiry-success" hidden tabindex="-1"><span class="success-mark" aria-hidden="true">✓</span><h3>A brighter start.</h3><p>Thank you. Your enquiry has been received.<br>The NCCT team can now review your project.</p><button class="button button-navy" type="button" data-close>Back to the homepage <span aria-hidden="true">↗</span></button></div>
+  <div class="drawer-contact">Prefer to speak directly? <a href="tel:{{ content.phone|cut:' ' }}">{{ content.phone }}</a></div>
+  </div>
+</dialog>
+<noscript><style>#enquiry{display:block;position:relative;width:100%;max-width:none;height:auto;max-height:none;margin:0;border:0}.menu-toggle,[data-close]{display:none}.category-panel[hidden]{display:block;margin-bottom:2rem}</style></noscript>

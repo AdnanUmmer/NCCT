@@ -1,0 +1,13 @@
+{% load static %}<header class="site-header" id="site-header">
+  <a class="brand" href="#home" aria-label="NCCT DXB home"><img src="{% static 'images/NCCTDXB.webp' %}" alt="" width="30" height="44"><span>NCCT<span class="brand-city">DXB</span></span></a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    <a href="#home" aria-current="page">Home</a><a href="#about">About</a><a href="#products">Products</a><a href="#projects">Projects</a><a href="#solutions">Solutions</a><a href="#resources">Resources</a><a href="#contact">Contact</a>
+  </nav>
+  <a href="#enquiry" class="button nav-enquire" data-enquire>Enquire <span aria-hidden="true">↗</span></a>
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+<dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation">
+  <div class="menu-top"><span class="eyebrow">NCCT DXB</span><button class="close-button" type="button" data-close aria-label="Close navigation">×</button></div>
+  <nav aria-label="Mobile navigation"><a href="#home">Home</a><a href="#about">About</a><a href="#products">Products</a><a href="#projects">Projects</a><a href="#solutions">Solutions</a><a href="#resources">Resources</a><a href="#contact">Contact</a></nav>
+  <p class="eyebrow">People · Places · Progress</p>
+</dialog>

@@ -1,0 +1,25 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NCCT DXB — Architectural & Professional Lighting</title>
+  <meta name="description" content="Explore NCCT's indoor, outdoor, decorative, industrial and professional lighting. Based in Business Bay, Dubai. Start a project enquiry.">
+  <meta name="theme-color" content="#0B1E34">
+  <link rel="canonical" href="{{ site_url|default:'https://ncctdxb.com' }}/">
+  <meta property="og:type" content="website"><meta property="og:title" content="NCCT DXB — Light that shapes space.">
+  <meta property="og:description" content="Architectural and professional lighting. People. Places. Progress.">
+  <meta property="og:url" content="{{ site_url|default:'https://ncctdxb.com' }}/">
+  <meta property="og:image" content="{{ site_url|default:'https://ncctdxb.com' }}{% static 'images/single-light-v2.webp' %}">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="NCCT DXB — Light that shapes space.">
+  <meta name="twitter:description" content="Architectural and professional lighting in Dubai.">
+  <meta name="twitter:image" content="{{ site_url|default:'https://ncctdxb.com' }}{% static 'images/single-light-v2.webp' %}">
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% block body %}{% endblock %}
+</body>
+</html>

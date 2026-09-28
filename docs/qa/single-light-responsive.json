@@ -1,0 +1,122 @@
+[
+  {
+    "brokenImages": 0,
+    "heroClearance": 136,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 360
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 133,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 390
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 122,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 430
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 148,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 768
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 124,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 1024
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 87,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 1280
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 64,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 1440
+  },
+  {
+    "brokenImages": 0,
+    "heroClearance": 43,
+    "overflow": false,
+    "sectionOrder": [
+      "home",
+      "about",
+      "solutions",
+      "projects",
+      "capabilities",
+      "products",
+      "contact"
+    ],
+    "width": 1920
+  }
+]

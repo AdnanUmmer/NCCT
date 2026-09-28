@@ -1,0 +1,90 @@
+[
+  {
+    "brokenAnchors": [],
+    "clientWidth": 345,
+    "emptyLinks": 0,
+    "heroClearance": 115,
+    "imageErrors": [],
+    "navWidth": 317,
+    "overflow": false,
+    "scrollWidth": 345,
+    "width": 360
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 375,
+    "emptyLinks": 0,
+    "heroClearance": 172,
+    "imageErrors": [],
+    "navWidth": 347,
+    "overflow": false,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 415,
+    "emptyLinks": 0,
+    "heroClearance": 169,
+    "imageErrors": [],
+    "navWidth": 387,
+    "overflow": false,
+    "scrollWidth": 415,
+    "width": 430
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 753,
+    "emptyLinks": 0,
+    "heroClearance": 190,
+    "imageErrors": [],
+    "navWidth": 689,
+    "overflow": false,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 1009,
+    "emptyLinks": 0,
+    "heroClearance": 199,
+    "imageErrors": [],
+    "navWidth": 945,
+    "overflow": false,
+    "scrollWidth": 1009,
+    "width": 1024
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 1265,
+    "emptyLinks": 0,
+    "heroClearance": 156,
+    "imageErrors": [],
+    "navWidth": 1201,
+    "overflow": false,
+    "scrollWidth": 1265,
+    "width": 1280
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 1425,
+    "emptyLinks": 0,
+    "heroClearance": 129,
+    "imageErrors": [],
+    "navWidth": 1361,
+    "overflow": false,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "brokenAnchors": [],
+    "clientWidth": 1905,
+    "emptyLinks": 0,
+    "heroClearance": 37,
+    "imageErrors": [],
+    "navWidth": 1536,
+    "overflow": false,
+    "scrollWidth": 1905,
+    "width": 1920
+  }
+]
