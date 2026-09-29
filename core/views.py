@@ -21,9 +21,9 @@ def home(request, form=None, form_status=200):
         'form_error': form is not None, 'sent': request.GET.get('enquiry') == 'sent', 'site_url':settings.SITE_URL,
         'schema': {'@context':'https://schema.org','@graph':[
             {'@type':['Organization','LocalBusiness'], '@id':settings.SITE_URL+'/#organization',
-             'name':'NCCT DXB', 'url':settings.SITE_URL+'/', 'email':content.email,'telephone':content.phone,
+             'name':'NCCT', 'url':settings.SITE_URL+'/', 'email':content.email,'telephone':content.phone,
              'address':{'@type':'PostalAddress','streetAddress':content.address,'addressLocality':'Dubai','addressCountry':'AE'}},
-            {'@type':'WebSite','@id':settings.SITE_URL+'/#website','url':settings.SITE_URL+'/', 'name':'NCCT DXB',
+            {'@type':'WebSite','@id':settings.SITE_URL+'/#website','url':settings.SITE_URL+'/', 'name':'NCCT',
              'publisher':{'@id':settings.SITE_URL+'/#organization'}}]}}
     return render(request, 'home.html', context, status=form_status)
 

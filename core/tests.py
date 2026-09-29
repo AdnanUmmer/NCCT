@@ -16,7 +16,7 @@ class HomepageTests(TestCase):
         self.assertIn('Light that<br>shapes space.',text)
         self.assertIn('application/ld+json',text)
         schema=json.loads(text.split('<script type="application/ld+json">')[1].split('</script>')[0])
-        self.assertEqual(schema['@graph'][0]['name'],'NCCT DXB')
+        self.assertEqual(schema['@graph'][0]['name'],'NCCT')
         self.assertIn('await confirmation',text)
 
     def test_seed_is_idempotent_and_keeps_edits(self):

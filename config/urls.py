@@ -12,5 +12,5 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = 'core.views.not_found'
 admin.site.site_header = 'NCCT · Content & enquiries'
-admin.site.site_title = 'NCCT DXB'
+admin.site.site_title = 'NCCT'
 admin.site.index_title = 'Homepage administration'
