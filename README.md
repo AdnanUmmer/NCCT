@@ -1,3 +1,44 @@
+VPS hosting: see [the complete Ubuntu deployment guide](docs/VPS-DEPLOYMENT.md).
+
+# NCCT corporate lighting website
+
+Django catalogue, applications, verified projects, downloads, enquiries and content administration. The approved single-light homepage is preserved.
+
+## Run locally
+
+```sh
+python -m venv .venv
+# Activate the environment, then:
+python -m pip install -r requirements-dev.txt
+# Export DJANGO_DEBUG=1 (PowerShell: $env:DJANGO_DEBUG='1')
+python manage.py migrate
+python manage.py seed_homepage
+python manage.py import_ncct_content
+python manage.py runserver
+```
+
+Environment files are not automatically loaded. See `.env.example`; never commit real credentials.
+
+## Validate
+
+```sh
+python manage.py check
+python manage.py makemigrations --check --dry-run
+python manage.py collectstatic --noinput
+python manage.py test
+python tools/audit_site.py
+```
+
+## Handover
+
+- [Production handover, admin guide and launch blockers](docs/PRODUCTION-HANDOVER.md)
+- [Source inventory and migration report](docs/SOURCE-MIGRATION.md)
+- [Render commands](docs/RENDER-DEPLOYMENT.md)
+
+The repository includes 5 reviewed Zoomled datasheets linked by the old NCCT site. It does not invent NCCT project delivery or republish unrelated LumoTubo case studies. Do not delete the seed/import receipts to refresh production content.
+
+## Earlier homepage documentation
+
 # NCCT DXB — homepage
 
 A working, server-rendered Django homepage and enquiry workflow. No About, Projects, Products, Resources or Contact pages are implemented. Navigation points to real homepage sections; catalogue and project requests open the enquiry drawer.

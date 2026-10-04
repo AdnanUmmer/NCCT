@@ -1,0 +1,42 @@
+Enquiry saved but notification delivery failed
+Traceback (most recent call last):
+  File "C:\Users\10adn\OneDrive\Documents\Projects\Advoxy_Projects\Project_NCCT\ncct\enquiries\notifications.py", line 10, in notify
+    send_mail('New NCCT website enquiry',
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              f'An enquiry from {enquiry.company_name} has been saved.\nReview it in the secure admin: {settings.SITE_URL}/admin/enquiries/enquiry/{enquiry.pk}/change/',
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              settings.DEFAULT_FROM_EMAIL, [settings.ENQUIRY_NOTIFICATION_EMAIL])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1234, in _execute_mock_call
+    raise effect
+RuntimeError: SMTP unavailable
+Enquiry storage unavailable
+Traceback (most recent call last):
+  File "C:\Users\10adn\OneDrive\Documents\Projects\Advoxy_Projects\Project_NCCT\ncct\enquiries\views.py", line 28, in submit
+    if not rate_allowed(request):
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\10adn\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1234, in _execute_mock_call
+    raise effect
+django.db.utils.OperationalError: test outage
+----------------------------------------------------------------------
+Ran 45 tests in 4.886s
+
+OK
+System check identified no issues (0 silenced).
+Homepage initialized. Existing content preserved; future runs will make no changes.
+Imported reviewed catalogue content. Existing records preserved.
+Catalogue already initialized; no records changed.
+Homepage initialized. Existing content preserved; future runs will make no changes.
+Homepage already initialized; no records changed.

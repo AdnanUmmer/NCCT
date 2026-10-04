@@ -40,9 +40,6 @@
   menuToggle?.addEventListener('click', () => {openDialog(menu, menuToggle); menuToggle.setAttribute('aria-expanded','true');});
   menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.close()));
   window.addEventListener('resize', () => {if (window.innerWidth > 900 && menu?.open) menu.close();});
-  document.querySelectorAll('[data-policy]').forEach(link => link.addEventListener('click', event => {
-    event.preventDefault(); openDialog(document.querySelector(`#policy-${link.dataset.policy}`), link);
-  }));
 
   const tabs = [...document.querySelectorAll('[role="tab"]')];
   function selectTab(tab) {
@@ -68,6 +65,19 @@
   const horizontalTabs = matchMedia('(max-width:900px)');
   const orientTabs = () => tabList?.setAttribute('aria-orientation', horizontalTabs.matches ? 'horizontal':'vertical');
   orientTabs(); horizontalTabs.addEventListener('change', orientTabs);
+
+  const filterPanel = document.querySelector('.filter-panel');
+  const filterDialog = document.querySelector('.filter-dialog');
+  const filterToggle = document.querySelector('[data-filter-open]');
+  const filterForm = filterPanel?.querySelector('form');
+  if (filterPanel && filterDialog && filterToggle && filterForm) {
+    filterPanel.classList.add('enhanced'); filterToggle.classList.add('enhanced');
+    filterToggle.addEventListener('click', () => {
+      filterDialog.append(filterForm); openDialog(filterDialog, filterToggle);
+    });
+    filterDialog.addEventListener('close', () => filterPanel.append(filterForm));
+    window.addEventListener('resize', () => {if (window.innerWidth > 768 && filterDialog.open) filterDialog.close();});
+  }
 
   const drawer = document.querySelector('#enquiry');
   const form = document.querySelector('#enquiry-form');

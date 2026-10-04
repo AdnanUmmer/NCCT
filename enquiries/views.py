@@ -7,6 +7,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
 from .forms import EnquiryForm
+from .notifications import notify
 from .models import Enquiry
 from .security import issue_token, read_token, rate_allowed, fingerprint, verify_bot_challenge
 
@@ -46,6 +47,7 @@ def submit(request):
                         enquiry.fingerprint = digest
                         enquiry.source_page = '/'
                         enquiry.save()
+                        transaction.on_commit(lambda: notify(enquiry))
                 except IntegrityError:
                     if not Enquiry.objects.filter(submission_id=submission_id).exists() and not Enquiry.objects.filter(fingerprint=digest).exists():
                         raise

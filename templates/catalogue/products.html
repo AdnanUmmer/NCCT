@@ -1,0 +1,14 @@
+{% extends 'catalogue/base.html' %}{% load catalogue_tags %}{% block content %}
+<header class="page-heading"><p class="eyebrow">The NCCT collection</p><h1>{{ heading }}</h1><p>{% if category %}{{ category.description }}{% else %}Explore the collection. Find the light for your setting.{% endif %}</p></header>
+<button type="button" class="button button-outline filter-toggle" data-filter-open>Search & filters</button><dialog class="filter-dialog" aria-labelledby="filter-title"><button class="close-button" data-close aria-label="Close filters">×</button><h2 id="filter-title">Find your light</h2></dialog>
+<details class="filter-panel" open><summary>Search & filter products</summary><form method="get" class="filters">
+<div><label for="product-search">Search products</label><input id="product-search" type="search" name="q" value="{{ q }}" placeholder="Name or model"></div>
+{% if not category %}<div><label for="category-filter">Category</label><select name="category" id="category-filter"><option value="">All categories</option>{% for cat in catalogue_categories %}<option value="{{ cat.slug }}" {% if selected_category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>{% endfor %}</select></div>{% endif %}
+{% for key,values in filters.items %}<div><label for="filter-{{ key }}">{{ key|field_label }}</label><select name="{{ key }}" id="filter-{{ key }}"><option value="">All</option>{% for value in values %}<option {% if request.GET|lookup:key == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></div>{% endfor %}
+<div><label for="sort">Sort by</label><select id="sort" name="sort"><option value="">Collection order</option><option value="name" {% if sort == 'name' %}selected{% endif %}>Name A–Z</option></select></div><button class="button button-navy" type="submit">Apply filters</button><a href="{{ request.path }}" class="text-link">Clear filters</a></form></details>
+<p class="results-count">{{ listing.paginator.count }} product{{ listing.paginator.count|pluralize }}</p>
+{% include 'catalogue/cards.html' with items=listing %}
+{% if not listing %}<div class="empty-state"><h2>No matching products</h2><p>Try another search or clear your filters. Our team can help with a specific requirement.</p><a class="text-link" href="/contact/">Contact NCCT</a></div>{% endif %}
+{% include 'catalogue/pagination.html' %}
+{% if not category %}<nav class="category-links" aria-label="Product categories">{% for cat in catalogue_categories %}<a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>{% endfor %}</nav>{% endif %}
+{% endblock %}

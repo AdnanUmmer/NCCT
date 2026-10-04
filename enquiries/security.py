@@ -16,12 +16,12 @@ def read_token(value):
         raise ValueError('Please take a moment to review your details, then submit again.')
     return uuid.UUID(data['id'])
 
-def rate_allowed(request):
+def rate_allowed(request, scope='enquiry', limit=None):
     # REMOTE_ADDR is supplied by the server. Never trust a client-supplied forwarded IP.
     bucket = int(time.time() // 600)
-    key = salted_hmac('enquiry-rate', f'{request.META.get("REMOTE_ADDR", "unknown")}:{bucket}').hexdigest()
+    key = salted_hmac(scope+'-rate', f'{request.META.get("REMOTE_ADDR", "unknown")}:{bucket}').hexdigest()
     window, _ = RateWindow.objects.get_or_create(key=key)
-    return bool(RateWindow.objects.filter(pk=window.pk, count__lt=settings.ENQUIRY_RATE_LIMIT).update(count=F('count')+1))
+    return bool(RateWindow.objects.filter(pk=window.pk, count__lt=limit if limit is not None else settings.ENQUIRY_RATE_LIMIT).update(count=F('count')+1))
 
 def verify_bot_challenge(request):
     verifier = settings.ENQUIRY_BOT_VERIFIER

@@ -5,14 +5,14 @@
 {% include 'partials/navbar.html' %}
 <main id="main">
   {% include 'sections/hero.html' %}
-  {% include 'sections/projects.html' %}
+  {% if content.show_projects %}{% include 'sections/projects.html' %}{% endif %}
   {% include 'sections/introduction.html' %}
-  {% include 'sections/solutions.html' %}
-  {% include 'sections/capabilities.html' %}
-  {% include 'sections/products.html' %}
+  {% if content.show_solutions %}{% include 'sections/solutions.html' %}{% endif %}
+  {% if content.show_capabilities %}{% include 'sections/capabilities.html' %}{% endif %}
+  {% if content.show_products %}{% include 'sections/products.html' %}{% endif %}
   {% include 'sections/contact.html' %}
 </main>
 {% include 'partials/footer.html' %}
 {% include 'partials/enquiry_modal.html' %}
-{% include 'partials/policy_modal.html' %}
+
 {% endblock %}

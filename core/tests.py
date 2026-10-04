@@ -32,8 +32,8 @@ class HomepageTests(TestCase):
         self.assertNotContains(response,'Ceiling lighting');self.assertNotContains(response,'Unverified claim')
 
     @override_settings(DEBUG=False,SECURE_SSL_REDIRECT=False)
-    def test_custom_404_and_future_pages_not_built(self):
-        for path in ['/about/','/projects/','/products/','/missing/']:
+    def test_custom_404(self):
+        for path in ['/missing/']:
             response=self.client.get(path);self.assertEqual(response.status_code,404);self.assertContains(response,'off course',status_code=404)
 
     def test_admin_content_pages(self):

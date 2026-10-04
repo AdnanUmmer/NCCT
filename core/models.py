@@ -43,9 +43,30 @@ class Homepage(ImageContent):
     terms_text = models.TextField(blank=True)
     cookie_text = models.TextField(blank=True)
 
+    company_name = models.CharField(max_length=100, default='NCCT')
+    footer_description = models.CharField(max_length=250, default='Architectural & professional lighting. Dubai, United Arab Emirates.')
+    logo = models.ImageField(upload_to='company/', blank=True, validators=[FileExtensionValidator(['png', 'webp', 'jpg'])])
+    seo_title = models.CharField(max_length=100, default='NCCT — Architectural & Professional Lighting')
+    seo_description = models.CharField(max_length=300, default='Explore NCCT indoor, outdoor, decorative, industrial and professional lighting. Based in Business Bay, Dubai.')
+    google_verification = models.CharField(max_length=150, blank=True)
+    bing_verification = models.CharField(max_length=150, blank=True)
+    projects_heading = models.CharField(max_length=100, default='Spaces, brought to light.')
+    products_heading = models.CharField(max_length=100, default='The detail makes the difference.')
+    solutions_heading = models.CharField(max_length=100, default='The right light. For every setting.')
+    contact_heading = models.CharField(max_length=120, default="Let's bring your space to light.")
+    show_projects = models.BooleanField(default=True)
+    show_products = models.BooleanField(default=True)
+    show_solutions = models.BooleanField(default=True)
+    show_capabilities = models.BooleanField(default=True)
+
     def save(self, *args, **kwargs):
         self.pk = 1
         super().save(*args, **kwargs)
+
+    def clean(self):
+        super().clean()
+        if self.logo and self.logo.size > 5 * 1024 * 1024:
+            raise ValidationError({'logo': 'Use a logo smaller than 5 MB.'})
 
     def __str__(self):
         return 'Homepage & contact settings'
@@ -56,6 +77,7 @@ class Capability(models.Model):
     order = models.PositiveSmallIntegerField(default=0)
     class Meta:
         ordering = ['order', 'pk']
+        verbose_name_plural = 'capabilities'
     def __str__(self): return self.title
 
 class VerifiedMetric(models.Model):
@@ -67,3 +89,66 @@ class VerifiedMetric(models.Model):
     class Meta:
         ordering = ['order', 'pk']
     def __str__(self): return f'{self.value} {self.label}'
+
+
+from .content import Publishable
+from .validators import validate_pdf
+from django.urls import reverse
+
+class Application(ImageContent, Publishable):
+    name = models.CharField(max_length=120)
+    description = models.TextField()
+    source_url = models.URLField(blank=True)
+    categories = models.ManyToManyField('products.Category', blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
+    class Meta:
+        ordering = ['order', 'pk']
+    def __str__(self): return self.name
+    def get_absolute_url(self): return reverse('solution-detail', args=[self.slug])
+
+class ContentPage(Publishable):
+    title = models.CharField(max_length=150)
+    introduction = models.TextField(blank=True)
+    body = models.TextField(blank=True)
+    class Meta:
+        ordering = ['title']
+    def __str__(self): return self.title
+    def get_absolute_url(self): return reverse('content-page', args=[self.slug])
+
+class Resource(Publishable):
+    TYPES = [('datasheet', 'Technical datasheet'), ('catalogue', 'Catalogue'), ('brochure', 'Brochure'), ('installation', 'Installation guide'), ('certificate', 'Certificate'), ('company', 'Company profile')]
+    title = models.CharField(max_length=150)
+    document_type = models.CharField(max_length=20, choices=TYPES, default='datasheet')
+    description = models.TextField(blank=True)
+    file = models.FileField(upload_to='documents/%Y/%m/', blank=True, validators=[validate_pdf])
+    bundled_file = models.CharField(max_length=180, blank=True, help_text='Bundled PDF filename under static/documents; leave blank for uploads.')
+    file_size = models.PositiveIntegerField(default=0, editable=False)
+    language = models.CharField(max_length=40, default='English')
+    source_url = models.URLField(blank=True)
+    category = models.ForeignKey('products.Category', null=True, blank=True, on_delete=models.SET_NULL)
+    products = models.ManyToManyField('products.Product', blank=True, related_name='documents')
+    featured = models.BooleanField(default=False)
+    order = models.PositiveSmallIntegerField(default=0)
+    class Meta:
+        ordering = ['order', 'title']
+    def __str__(self): return self.title
+    def get_absolute_url(self): return reverse('resource-download', args=[self.slug])
+    def clean(self):
+        super().clean()
+        from pathlib import Path
+        from django.conf import settings
+        if not self.file and not self.bundled_file:
+            raise ValidationError('Upload a PDF or select an existing bundled PDF.')
+        if self.bundled_file:
+            if Path(self.bundled_file).name != self.bundled_file or not self.bundled_file.endswith('.pdf'):
+                raise ValidationError({'bundled_file': 'Use a PDF basename without directories.'})
+            if not (settings.BASE_DIR / 'static/documents' / self.bundled_file).is_file():
+                raise ValidationError({'bundled_file': 'Bundled PDF does not exist.'})
+    def save(self, *args, **kwargs):
+        if self.file:
+            self.file_size = self.file.size
+        elif self.bundled_file:
+            from django.conf import settings
+            path = settings.BASE_DIR / 'static/documents' / self.bundled_file
+            if path.is_file(): self.file_size = path.stat().st_size
+        super().save(*args, **kwargs)

@@ -20,11 +20,11 @@ INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'whitenoise.middleware.WhiteNoiseMiddleware',
               'django.contrib.sessions.middleware.SessionMiddleware', 'django.middleware.common.CommonMiddleware',
               'django.middleware.csrf.CsrfViewMiddleware', 'django.contrib.auth.middleware.AuthenticationMiddleware',
-              'django.contrib.messages.middleware.MessageMiddleware', 'django.middleware.clickjacking.XFrameOptionsMiddleware']
+              'core.middleware.AdminLoginRateLimit', 'django.contrib.messages.middleware.MessageMiddleware', 'django.middleware.clickjacking.XFrameOptionsMiddleware']
 ROOT_URLCONF = 'config.urls'
 TEMPLATES = [{'BACKEND': 'django.template.backends.django.DjangoTemplates', 'DIRS': [BASE_DIR/'templates'],
               'APP_DIRS': True, 'OPTIONS': {'context_processors': ['django.template.context_processors.request',
-              'django.contrib.auth.context_processors.auth', 'django.contrib.messages.context_processors.messages']}}]
+              'django.contrib.auth.context_processors.auth', 'django.contrib.messages.context_processors.messages', 'core.context_processors.site_content']}}]
 WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}', conn_max_age=60)}
 AUTH_PASSWORD_VALIDATORS = [{'NAME': f'django.contrib.auth.password_validation.{name}'} for name in
@@ -52,9 +52,9 @@ SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 # even if an older deployment still sets DJANGO_SSL_REDIRECT=1.
 ON_RENDER = os.environ.get('RENDER') == 'true'
 SECURE_SSL_REDIRECT = False if ON_RENDER else os.environ.get('DJANGO_SSL_REDIRECT', '0' if DEBUG else '1') == '1'
-SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_HSTS_SECONDS', '0' if DEBUG else '31536000'))
-SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
-SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_HSTS_SECONDS', '0'))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.environ.get('DJANGO_HSTS_INCLUDE_SUBDOMAINS', '0') == '1'
+SECURE_HSTS_PRELOAD = os.environ.get('DJANGO_HSTS_PRELOAD', '0') == '1'
 # Render terminates TLS before forwarding requests to Django. Recognise the
 # original scheme so SecurityMiddleware does not redirect HTTPS back to itself.
 # Retain the explicit opt-in for other trusted reverse-proxy deployments.
@@ -65,3 +65,27 @@ ENQUIRY_RATE_LIMIT = 10
 # Optional dotted callable(request) -> bool; integrate Turnstile verification here.
 ENQUIRY_BOT_VERIFIER = ''
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+
+# Public indexing is an explicit launch decision; previews remain noindex.
+SITE_INDEXABLE = os.environ.get('SITE_INDEXABLE', '0') == '1'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', '1') == '1'
+EMAIL_TIMEOUT = 10
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
+ENQUIRY_NOTIFICATION_EMAIL = os.environ.get('ENQUIRY_NOTIFICATION_EMAIL', '')
+# Optional persistent S3-compatible storage for Render's ephemeral instances.
+if os.environ.get('AWS_STORAGE_BUCKET_NAME'):
+    STORAGES['default'] = {'BACKEND': 'storages.backends.s3.S3Storage', 'OPTIONS': {
+        'bucket_name': os.environ['AWS_STORAGE_BUCKET_NAME'],
+        'endpoint_url': os.environ.get('AWS_S3_ENDPOINT_URL') or None,
+        'region_name': os.environ.get('AWS_S3_REGION_NAME') or None,
+        'default_acl': None, 'file_overwrite': False,
+        'object_parameters': {'CacheControl': 'max-age=86400'},
+    }}
+MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', str(BASE_DIR / 'media')))
+
+ADMIN_LOGIN_RATE_LIMIT = int(os.environ.get('ADMIN_LOGIN_RATE_LIMIT', '20'))

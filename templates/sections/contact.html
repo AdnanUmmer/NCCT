@@ -1,5 +1,5 @@
 <section class="contact-cta" id="contact" aria-labelledby="contact-heading"><div class="container">
-  <p class="eyebrow">Your next project starts with a conversation</p><div class="contact-line"><h2 id="contact-heading">Let's bring<br>your space <em>to light.</em></h2></div>
+  <p class="eyebrow">Your next project starts with a conversation</p><div class="contact-line"><h2 id="contact-heading">{% if content.contact_heading == "Let's bring your space to light." %}Let's bring<br>your space <em>to light.</em>{% else %}{{ content.contact_heading|linebreaksbr }}{% endif %}</h2></div>
   <div class="contact-bottom"><p>Share your vision. Explore the possibilities.</p><a class="text-link light" href="#enquiry" data-enquire>Start an enquiry </a></div>
   {% if sent %}<p class="success-banner" role="status">Thank you. Your enquiry has been received.</p>{% endif %}
 </div></section>

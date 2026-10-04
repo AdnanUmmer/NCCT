@@ -1,6 +1,6 @@
 <section class="solutions section" id="solutions" aria-labelledby="solutions-heading">
   <div class="container">
-    <div class="section-heading"><div><p class="eyebrow">03 / Lighting solutions</p><h2 id="solutions-heading">A different space.<br>A considered light.</h2></div><p>From the smallest detail<br>to the wider environment.</p></div>
+    <div class="section-heading"><div><p class="eyebrow">03 / Lighting solutions</p><h2 id="solutions-heading">{% if content.solutions_heading == "The right light. For every setting." %}A different space.<br>A considered light.{% else %}{{ content.solutions_heading|linebreaksbr }}{% endif %}</h2></div><p>From the smallest detail<br>to the wider environment.</p></div>
     <div class="solutions-layout">
       <div class="category-list" role="tablist" aria-label="Lighting categories" aria-orientation="vertical">
       {% for category in categories %}<button class="category-tab" id="category-{{ category.pk }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="category-panel-{{ category.pk }}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"><span class="category-number">0{{ forloop.counter }}</span><span>{{ category.name }}</span></button>{% endfor %}
@@ -8,7 +8,7 @@
       <div class="category-panels">
       {% for category in categories %}<div class="category-panel" id="category-panel-{{ category.pk }}" role="tabpanel" aria-labelledby="category-{{ category.pk }}" tabindex="0" {% if not forloop.first %}hidden{% endif %}>
         <div class="category-image"><picture><source media="(max-width: 600px)" srcset="{{ category.image_small_url }}"><img src="{{ category.image_url }}" alt="{{ category.image_alt }}" loading="lazy" width="900" height="650"></picture><span class="image-label">Lighting environments</span></div>
-        <div class="category-caption"><p>{{ category.description }}</p><a href="#enquiry" class="text-link" data-enquire data-interest="{{ category.name }}">Discover <span class="sr-only">{{ category.name }}</span></a></div>
+        <div class="category-caption"><p>{{ category.description }}</p><a href="{{ category.get_absolute_url }}" class="text-link">Discover <span class="sr-only">{{ category.name }}</span></a></div>
       </div>{% endfor %}
       </div>
     </div>

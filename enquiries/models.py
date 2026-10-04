@@ -18,6 +18,7 @@ class Enquiry(models.Model):
     fingerprint = models.CharField(max_length=64, unique=True, editable=False)
     class Meta:
         ordering = ['-created_at']
+        verbose_name_plural = 'enquiries'
     def __str__(self): return f'{self.company_name} · {self.name}'
 
 class RateWindow(models.Model):

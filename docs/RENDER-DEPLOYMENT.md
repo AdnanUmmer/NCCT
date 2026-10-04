@@ -1,48 +1,29 @@
-# Render homepage initialization
+# Render deployment
 
-Set the existing service's **Build Command** to:
+The complete current deployment and release checklist is in [PRODUCTION-HANDOVER.md](PRODUCTION-HANDOVER.md).
 
-```bash
-bash build.sh
-```
+Build command: `bash build.sh`
 
-Keep the existing Start Command. The script installs requirements, checks Django, and runs in fail-fast order:
+The build installs dependencies and runs:
 
-```bash
+```sh
+python manage.py check
 python manage.py migrate --noinput
 python manage.py seed_homepage
+python manage.py import_ncct_content
 python manage.py collectstatic --noinput
 ```
 
-The build and running service must use the same persistent production database through `DATABASE_URL` (normally Render PostgreSQL). Keep credentials in Render environment variables. Do not commit `.env` or `db.sqlite3`.
+No Render Shell or separate manual seed step is needed. Both initializers preserve later admin edits and deliberate deletions.
 
-## What is created
+Start command on Linux:
 
-On an empty database: one Homepage using the single-light hero, five Categories, three featured Projects, three featured and verified Products, and four Capabilities. No metrics are seeded because no verified statistics exist. No users, passwords, enquiries, or uploaded media are seeded. Static image configuration is unchanged.
-
-## Repeat-run protection
-
-`core.HomepageSeedState` stores the `homepage-v1` initialization receipt. The receipt and starter records are written in one database transaction; any failure rolls back both. Once successful, later invocations exit without changing content. Renames, image replacements, publication flags, ordering, custom copy and deliberate deletions are preserved.
-
-For an existing database without a receipt, each populated section is treated as administrator-owned and left alone. Empty sections are initialized. Existing Homepage content is preserved by `get_or_create(pk=1)`. Populated but incomplete sections are not topped up automatically, because doing so could reintroduce content an administrator intentionally removed or renamed.
-
-If Products is empty but existing Categories no longer contain the required original category names, initialization fails without writes instead of attaching products to an arbitrary category. Add the intended products through admin and rerun. The seed command is an initializer, not an ongoing content synchronizer or reset command.
-
-## Existing deployment
-
-After deploying this commit with `bash build.sh`, no separate manual seeding step is necessary if the build and app share the same persistent database. To initialize the currently running production database immediately after the new code is available, run in Render Shell:
-
-```bash
-python manage.py migrate --noinput
-python manage.py seed_homepage
+```sh
+gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile - --error-logfile -
 ```
 
-Repeated runs are safe. Verify the deploy log says either `Homepage initialized` or `Homepage already initialized`.
+Keep the existing main branch and service. Configure persistent PostgreSQL via DATABASE_URL and S3-compatible storage for uploads; free Render local storage is ephemeral. The build and application must connect to the same persistent database. Keep secrets out of Git.
 
-## SQLite and persistence
+Both ncct.onrender.com and design.theadvoxy.com must be present in DJANGO_ALLOWED_HOSTS and their HTTPS origins in DJANGO_CSRF_TRUSTED_ORIGINS. Render terminates HTTPS; Django trusts its scheme header and does not issue a second HTTPS redirect.
 
-If `DATABASE_URL` is unset, this project uses SQLite in the application directory. That database is not in Git. Build-time seeding can populate a new build's SQLite file, but it does **not** preserve later administrator edits or enquiries across replacement of an ephemeral filesystem. The initialization receipt cannot preserve a database that has itself been discarded. Use persistent PostgreSQL for normal Render deployment.
-
-For an explicitly configured SQLite database on a Render persistent disk, the disk is unavailable during build/pre-deploy. Run migrations and seeding at runtime against the mounted disk before starting the server, rather than using this combined build script for database tasks. No database/storage migration or Render dashboard changes were performed by this code change.
-
-References: https://render.com/docs/deploys and https://render.com/docs/disks.
+SITE_INDEXABLE defaults to 0 for preview safety. Enable it at the approved public launch. Read the handover for required variables, intentional deployment-check warnings, legal/content blockers and verification evidence.

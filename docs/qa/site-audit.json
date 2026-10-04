@@ -1,0 +1,142 @@
+{
+  "counts": {
+    "products": 8,
+    "verified_model_products": 5,
+    "categories": 5,
+    "verified_projects": 0,
+    "unverified_editorial_images": 3,
+    "resources": 5,
+    "solutions": 5
+  },
+  "pages": {
+    "/": {
+      "status": 200,
+      "title": "NCCT \u2014 Architectural & Professional Lighting"
+    },
+    "/about/": {
+      "status": 200,
+      "title": "About NCCT | NCCT"
+    },
+    "/products/": {
+      "status": 200,
+      "title": "Lighting products | NCCT"
+    },
+    "/projects/": {
+      "status": 200,
+      "title": "Projects | NCCT"
+    },
+    "/solutions/": {
+      "status": 200,
+      "title": "Lighting solutions | NCCT"
+    },
+    "/resources/": {
+      "status": 200,
+      "title": "Resources & downloads | NCCT"
+    },
+    "/contact/": {
+      "status": 200,
+      "title": "Contact NCCT | NCCT"
+    },
+    "/products/indoor-lighting-1/": {
+      "status": 200,
+      "title": "Indoor lighting | NCCT"
+    },
+    "/products/outdoor-lighting-2/": {
+      "status": 200,
+      "title": "Outdoor lighting | NCCT"
+    },
+    "/products/decorative-lighting-3/": {
+      "status": 200,
+      "title": "Decorative lighting | NCCT"
+    },
+    "/products/industrial-lighting-4/": {
+      "status": 200,
+      "title": "Industrial lighting | NCCT"
+    },
+    "/products/professional-lighting-5/": {
+      "status": 200,
+      "title": "Professional lighting | NCCT"
+    },
+    "/products/indoor-lighting-1/ceiling-lighting-1/": {
+      "status": 200,
+      "title": "Ceiling lighting | NCCT"
+    },
+    "/products/indoor-lighting-1/wall-lighting-2/": {
+      "status": 200,
+      "title": "Wall lighting | NCCT"
+    },
+    "/products/industrial-lighting-4/pendant-lighting-3/": {
+      "status": 200,
+      "title": "Pendant lighting | NCCT"
+    },
+    "/privacy/": {
+      "status": 200,
+      "title": "Privacy information | NCCT"
+    },
+    "/terms/": {
+      "status": 200,
+      "title": "Website information | NCCT"
+    },
+    "/cookies/": {
+      "status": 200,
+      "title": "Cookie information | NCCT"
+    },
+    "/products/outdoor-lighting-2/zoomled-bl1/": {
+      "status": 200,
+      "title": "Bollard luminaire | NCCT"
+    },
+    "/products/outdoor-lighting-2/zoomled-el8-el2/": {
+      "status": 200,
+      "title": "Inground luminaire | NCCT"
+    },
+    "/products/outdoor-lighting-2/zoomled-el12a/": {
+      "status": 200,
+      "title": "Floor marker luminaire | NCCT"
+    },
+    "/products/outdoor-lighting-2/zoomled-l6-l10/": {
+      "status": 200,
+      "title": "Spot luminaire | NCCT"
+    },
+    "/products/outdoor-lighting-2/zoomled-l15/": {
+      "status": 200,
+      "title": "Wall recessed luminaire | NCCT"
+    },
+    "/solutions/indoor-lighting-1/": {
+      "status": 200,
+      "title": "Indoor lighting solutions | NCCT"
+    },
+    "/solutions/outdoor-lighting-2/": {
+      "status": 200,
+      "title": "Outdoor lighting solutions | NCCT"
+    },
+    "/solutions/decorative-lighting-3/": {
+      "status": 200,
+      "title": "Decorative lighting solutions | NCCT"
+    },
+    "/solutions/industrial-lighting-4/": {
+      "status": 200,
+      "title": "Industrial lighting solutions | NCCT"
+    },
+    "/solutions/professional-lighting-5/": {
+      "status": 200,
+      "title": "Professional lighting solutions | NCCT"
+    },
+    "/resources/zoomled-bl1-datasheet/download/": {
+      "status": 200
+    },
+    "/resources/zoomled-el8-el2-datasheet/download/": {
+      "status": 200
+    },
+    "/resources/zoomled-el12a-datasheet/download/": {
+      "status": 200
+    },
+    "/resources/zoomled-l6-l10-datasheet/download/": {
+      "status": 200
+    },
+    "/resources/zoomled-l15-datasheet/download/": {
+      "status": 200
+    }
+  },
+  "assets_checked": 19,
+  "errors": []
+}

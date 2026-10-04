@@ -101,3 +101,12 @@ class EnquiryTests(TestCase):
         e=Enquiry.objects.get()
         self.assertEqual(self.client.post(f'/admin/enquiries/enquiry/{e.pk}/change/',{'status':'contacted','_save':'Save'}).status_code,302)
         e.refresh_from_db();self.assertEqual(e.status,'contacted')
+
+
+    @override_settings(EMAIL_HOST='smtp.example.test', ENQUIRY_NOTIFICATION_EMAIL='team@example.test')
+    def test_email_failure_does_not_lose_enquiry(self):
+        with patch('enquiries.notifications.send_mail', side_effect=RuntimeError('SMTP unavailable')):
+            with self.captureOnCommitCallbacks(execute=True):
+                response = self.post()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Enquiry.objects.count(), 1)
