@@ -7,15 +7,20 @@
   <meta name="theme-color" content="#0B1E34">
   <link rel="canonical" href="{{ canonical }}">
   {% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
-  <meta property="og:type" content="website"><meta property="og:title" content="{{ page_title }}">
-  <meta property="og:description" content="{{ meta_description }}"><meta property="og:url" content="{{ canonical }}"><meta property="og:image" content="{{ social_image }}">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{ page_title }}"><meta name="twitter:description" content="{{ meta_description }}"><meta name="twitter:image" content="{{ social_image }}">
+  {% firstof og_title page_title as ogt %}{% firstof og_description meta_description as ogd %}
+  <meta property="og:type" content="website"><meta property="og:site_name" content="{{ content.company_name|default:'NCCT' }}"><meta property="og:locale" content="en_AE">
+  <meta property="og:title" content="{{ ogt }}"><meta property="og:description" content="{{ ogd }}">
+  <meta property="og:url" content="{{ canonical }}"><meta property="og:image" content="{{ social_image }}">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{ ogt }}"><meta name="twitter:description" content="{{ ogd }}"><meta name="twitter:image" content="{{ social_image }}">
   {% if content.google_verification %}<meta name="google-site-verification" content="{{ content.google_verification }}">{% endif %}
   {% if content.bing_verification %}<meta name="msvalidate.01" content="{{ content.bing_verification }}">{% endif %}
+  {% if ga4_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ ga4_id }}',{anonymize_ip:true});</script>{% endif %}
   <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
   <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
+  <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
   <script src="{% static 'js/site.js' %}" defer></script>
+  <script src="{% static 'js/showcase.js' %}" defer></script>
   {% block head %}{% endblock %}
 </head>
 <body class="{% if request.path != '/' %}inner-page{% endif %}">

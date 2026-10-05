@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.templatetags.static import static
+from .validators import validate_link, validate_ga4
 
 class HomepageSeedState(models.Model):
     """One-time initialization receipt, committed atomically with starter data."""
@@ -48,6 +49,13 @@ class Homepage(ImageContent):
     logo = models.ImageField(upload_to='company/', blank=True, validators=[FileExtensionValidator(['png', 'webp', 'jpg'])])
     seo_title = models.CharField(max_length=100, default='NCCT — Architectural & Professional Lighting')
     seo_description = models.CharField(max_length=300, default='Explore NCCT indoor, outdoor, decorative, industrial and professional lighting. Based in Business Bay, Dubai.')
+    og_image = models.ImageField('Social share image', upload_to='social/%Y/%m/', blank=True, validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp'])], help_text='Default image shown when links are shared. Defaults to the hero image.')
+    ga4_measurement_id = models.CharField('Google Analytics (GA4) ID', max_length=20, blank=True, validators=[validate_ga4], help_text='Optional, e.g. G-XXXXXXXXXX. Only loads once the site is live and indexable.')
+    hero_eyebrow = models.CharField(max_length=100, default='Architectural & professional lighting')
+    hero_cta_text = models.CharField('Primary button text', max_length=40, default='Explore projects')
+    hero_cta_link = models.CharField('Primary button link', max_length=200, default='/projects/', validators=[validate_link])
+    hero_secondary_text = models.CharField('Secondary link text', max_length=40, default='Discover solutions')
+    hero_secondary_link = models.CharField('Secondary link', max_length=200, default='#solutions', validators=[validate_link])
     google_verification = models.CharField(max_length=150, blank=True)
     bing_verification = models.CharField(max_length=150, blank=True)
     projects_heading = models.CharField(max_length=100, default='Spaces, brought to light.')
@@ -92,7 +100,7 @@ class VerifiedMetric(models.Model):
 
 
 from .content import Publishable
-from .validators import validate_pdf
+from .validators import validate_pdf, validate_link, validate_ga4
 from django.urls import reverse
 
 class Application(ImageContent, Publishable):
@@ -108,6 +116,8 @@ class Application(ImageContent, Publishable):
 
 class ContentPage(Publishable):
     title = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='pages/%Y/%m/', blank=True, validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp', 'avif'])], help_text='Optional hero image. Leave blank to use the bundled image.')
+    image_alt = models.CharField(max_length=250, blank=True)
     introduction = models.TextField(blank=True)
     body = models.TextField(blank=True)
     class Meta:
@@ -122,6 +132,8 @@ class Resource(Publishable):
     description = models.TextField(blank=True)
     file = models.FileField(upload_to='documents/%Y/%m/', blank=True, validators=[validate_pdf])
     bundled_file = models.CharField(max_length=180, blank=True, help_text='Bundled PDF filename under static/documents; leave blank for uploads.')
+    cover = models.ImageField('Cover / thumbnail', upload_to='resources/%Y/%m/', blank=True, validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp'])], help_text='Optional thumbnail for the document.')
+    cover_alt = models.CharField(max_length=250, blank=True)
     file_size = models.PositiveIntegerField(default=0, editable=False)
     language = models.CharField(max_length=40, default='English')
     source_url = models.URLField(blank=True)
@@ -152,3 +164,38 @@ class Resource(Publishable):
             path = settings.BASE_DIR / 'static/documents' / self.bundled_file
             if path.is_file(): self.file_size = path.stat().st_size
         super().save(*args, **kwargs)
+
+
+class PageContent(models.Model):
+    """Editable copy for listing pages. One row per page key; rows are created on first use."""
+    KEYS = [('products', 'Products page'), ('projects', 'Projects page'), ('resources', 'Resources page'),
+            ('solutions', 'Solutions page'), ('contact', 'Contact page'), ('about', 'About page (call to action)')]
+    key = models.CharField(max_length=20, choices=KEYS, unique=True)
+    eyebrow = models.CharField(max_length=100, blank=True)
+    heading = models.CharField(max_length=150, blank=True, help_text='The main page heading (H1).')
+    intro = models.TextField(blank=True)
+    notice = models.TextField('Notice / disclosure', blank=True, help_text='Small print shown on the page (Projects page).')
+    cta_eyebrow = models.CharField('Call-to-action label', max_length=100, blank=True)
+    cta_heading = models.CharField('Call-to-action heading', max_length=150, blank=True)
+    cta_text = models.CharField('Call-to-action button text', max_length=40, blank=True)
+    cta_link = models.CharField('Call-to-action link', max_length=200, blank=True, validators=[validate_link], help_text='Leave blank to open the enquiry form.')
+    seo_title = models.CharField(max_length=100, blank=True)
+    seo_description = models.CharField(max_length=300, blank=True)
+    og_title = models.CharField('Social share title', max_length=100, blank=True)
+    og_description = models.CharField('Social share description', max_length=300, blank=True)
+    og_image = models.ImageField('Social share image', upload_to='social/%Y/%m/', blank=True, validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp'])])
+    noindex = models.BooleanField('Hide from search engines', default=False)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['key']
+        verbose_name = 'page text & SEO'
+        verbose_name_plural = 'page text & SEO'
+
+    def __str__(self):
+        return self.get_key_display()
+
+    def clean(self):
+        super().clean()
+        if self.og_image and self.og_image.size > 5 * 1024 * 1024:
+            raise ValidationError({'og_image': 'Use an image smaller than 5 MB.'})

@@ -16,7 +16,8 @@ CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get('DJANGO_CSRF
 SITE_URL = os.environ.get('SITE_URL', 'https://ncctdxb.com').rstrip('/')
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
-                  'core', 'projects', 'products', 'enquiries']
+                  'core', 'projects', 'products', 'enquiries', 'django.forms']
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'whitenoise.middleware.WhiteNoiseMiddleware',
               'django.contrib.sessions.middleware.SessionMiddleware', 'django.middleware.common.CommonMiddleware',
               'django.middleware.csrf.CsrfViewMiddleware', 'django.contrib.auth.middleware.AuthenticationMiddleware',

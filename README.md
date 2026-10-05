@@ -165,3 +165,12 @@ See [QA results](docs/QA.md). The 21 automated tests and browser checks pass. Li
 The homepage is implemented, but publication needs the missing content listed in [CONTENT-AUDIT.md](docs/CONTENT-AUDIT.md): the new brand pack/Figma references, confirmed NCCT project credentials and photography, product names/data sheets, approved legal copy, and any verified statistics. Source imagery is labelled without implying completed NCCT work.
 
 Phase 2 can add About, project index/case studies, product discovery/details, solution pages, downloads/resources, Contact, approved legal pages, Arabic/RTL if requested, email/CRM delivery and production hosting. No routes or pages for these have been built in this phase.
+
+## Content management & SEO (admin)
+
+- Admin dashboard groups content: Website content (Homepage, *Page text & SEO*, About/content pages), Product catalogue, Projects, Resources, Enquiries.
+- *Page text & SEO* edits the headings, intros, CTA bands and SEO/social fields of the Products, Projects, Resources, Solutions, Contact and About pages. Rows are created by migration `core.0007`; they cannot be added or deleted.
+- Every category, product, project, solution, page and resource has SEO title/description, Open Graph title/description/image, noindex and optional canonical override.
+- Homepage admin controls hero eyebrow/heading/buttons/image, GA4 measurement ID (loaded only when `SITE_INDEXABLE=1`) and Google/Bing verification tokens (supply real tokens only).
+- `noindex` items and filtered/query URLs are excluded from the sitemap/indexing; canonicals are always the clean HTTPS path.
+- Deploy: `python manage.py migrate && python manage.py collectstatic --noinput`. Audit: `python tools/audit_site.py`.

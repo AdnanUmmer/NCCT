@@ -6,7 +6,7 @@ from django.urls import reverse
 class Category(ImageContent, Publishable):
     name = models.CharField(max_length=80)
     description = models.CharField(max_length=240)
-    source_url = models.URLField()
+    source_url = models.URLField(blank=True)
     order = models.PositiveSmallIntegerField(default=0)
     class Meta:
         ordering = ['order', 'pk']
@@ -37,6 +37,7 @@ class Product(ImageContent, Publishable):
 
 class ProductImage(ImageContent):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery')
+    caption = models.CharField(max_length=160, blank=True)
     order = models.PositiveSmallIntegerField(default=0)
     class Meta:
         ordering = ['order', 'pk']

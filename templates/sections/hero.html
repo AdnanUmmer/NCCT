@@ -2,10 +2,10 @@
   <picture class="hero-media"><source media="(max-width: 600px)" srcset="{{ content.image_small_url }}"><img src="{{ content.image_url }}" alt="{{ content.image_alt }}" width="1600" height="914" fetchpriority="high"></picture>
   <div class="hero-shade"></div>
   <div class="hero-content container">
-    <p class="eyebrow hero-eyebrow"><span class="gold-rule"></span>Architectural & professional lighting</p>
+    <p class="eyebrow hero-eyebrow"><span class="gold-rule"></span>{{ content.hero_eyebrow }}</p>
     <h1 id="hero-heading">{{ content.hero_heading|linebreaksbr }}</h1>
     <p class="hero-copy">{{ content.hero_copy|linebreaksbr }}</p>
-    <div class="hero-actions"><a class="button button-light" href="#projects">Explore projects </a><a class="text-link light" href="#solutions">Discover solutions </a></div>
+    <div class="hero-actions">{% if content.hero_cta_text %}<a class="button button-light" href="{{ content.hero_cta_link }}">{{ content.hero_cta_text }} </a>{% endif %}{% if content.hero_secondary_text %}<a class="text-link light" href="{{ content.hero_secondary_link }}">{{ content.hero_secondary_text }} </a>{% endif %}</div>
   </div>
   <div class="hero-bottom container"><a class="scroll-link eyebrow" href="#about"> Scroll to discover</a><span class="hero-caption">{{ content.hero_caption }}</span><span class="hero-index"><b>01</b> <span>/</span> NCCT</span></div>
 </section>

@@ -1,0 +1,10 @@
+{% load ncct_admin %}<div class="filefield{% if widget.is_initial %} has-file{% endif %}">
+{% if widget.is_initial %}
+ <div class="file-current">
+  {% if widget.value.url|lower|slice:"-4:" == ".pdf" %}<span class="file-ico">{% icon 'file' 28 %}</span>{% else %}<a href="{{ widget.value.url }}" target="_blank" rel="noopener" class="file-thumb"><img src="{{ widget.value.url }}" alt="Current image preview" loading="lazy"></a>{% endif %}
+  <div class="file-meta"><strong>Current file</strong><a href="{{ widget.value.url }}" target="_blank" rel="noopener">{{ widget.value.name|cut:"products/"|cut:"projects/"|cut:"resources/" }}</a>
+  {% if not widget.required %}<label class="file-remove" for="{{ widget.checkbox_id }}"><input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"{% if widget.attrs.disabled %} disabled{% endif %}> Remove this file when saving</label>{% endif %}</div>
+ </div>
+{% endif %}
+ <div class="file-pick"><label class="file-label" for="{{ widget.attrs.id }}">{% icon 'upload' 16 %}<span>{% if widget.is_initial %}Replace file{% else %}Choose file{% endif %}</span></label><input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}><span class="file-name" aria-live="polite">No new file selected</span></div>
+</div>

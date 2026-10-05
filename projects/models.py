@@ -25,6 +25,7 @@ class Project(ImageContent, Publishable):
 
 class ProjectImage(ImageContent):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='gallery')
+    caption = models.CharField(max_length=160, blank=True)
     order = models.PositiveSmallIntegerField(default=0)
     class Meta:
         ordering = ['order', 'pk']

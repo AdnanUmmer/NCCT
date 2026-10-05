@@ -13,6 +13,8 @@ def site_content(request):
     return {'content': content, 'site_url': settings.SITE_URL,
             'page_title': content.seo_title, 'meta_description': content.seo_description,
             'canonical': settings.SITE_URL + request.path,
-            'social_image': urljoin(settings.SITE_URL, content.image_url),
+            'social_image': urljoin(settings.SITE_URL, content.og_image.url if content.og_image else content.image_url),
+            'og_title': content.seo_title, 'og_description': content.seo_description,
+            'ga4_id': content.ga4_measurement_id if settings.SITE_INDEXABLE else '',
             'noindex': not settings.SITE_INDEXABLE,
             'form': EnquiryForm(initial={'token': issue_token()})}

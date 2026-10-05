@@ -25,7 +25,7 @@ class CatalogueTests(TestCase):
 
     def test_routes_and_unique_metadata(self):
         paths = ['/', '/products/', '/projects/', '/solutions/', '/resources/', '/about/', '/contact/', '/privacy/', '/terms/', '/cookies/']
-        paths += [x.get_absolute_url() for Model in (Product, Category, Application) for x in Model.objects.all()]
+        paths += [x.get_absolute_url() for Model in (Product, Category, Application, Project) for x in Model.objects.filter(published=True)]
         titles = []
         for path in paths:
             response = self.client.get(path)
@@ -55,7 +55,7 @@ class CatalogueTests(TestCase):
         self.assertContains(response, 'value="SPJ105"')
         response = self.client.get('/products/', {'q':'SPJ105','ip_rating':'IP68'})
         self.assertContains(response, 'No matching products')
-        self.assertEqual(self.client.get('/products/').context['listing'].paginator.count, 8)
+        self.assertEqual(self.client.get('/products/').context['listing'].paginator.count, Product.objects.filter(published=True).count())
 
     def test_pagination_invalid_input(self):
         for value in ['abc', '-4', '999']:
@@ -68,9 +68,10 @@ class CatalogueTests(TestCase):
         category = Category.objects.get(pk=product.category_id)
         category.published=False; category.save()
         self.assertEqual(self.client.get(category.get_absolute_url()).status_code,404)
-        for project in Project.objects.all():
-            self.assertEqual(self.client.get(project.get_absolute_url()).status_code,404)
-        self.assertNotContains(self.client.get('/projects/'), 'The architecture of atmosphere')
+        project = Project.objects.first(); project.published = False; project.save()
+        self.assertEqual(self.client.get(project.get_absolute_url()).status_code, 404)
+        self.assertNotContains(self.client.get('/projects/'), project.title)
+        self.assertEqual(Project.objects.filter(published=True, attribution_verified=True).count(), 0)
 
     def test_verified_project_detail_and_related_product(self):
         project = Project.objects.first(); project.attribution_verified=True; project.description='Verified test project'; project.save()
@@ -161,3 +162,20 @@ class CatalogueTests(TestCase):
         response=self.client.post('/admin/login/', {'username':'absent','password':'invalid'})
         self.assertEqual(response.status_code,429)
         self.assertEqual(response['Retry-After'],'600')
+
+    def test_catalogue_v2_and_showcase(self):
+        self.assertEqual(Category.objects.count(), 9)
+        self.assertEqual(Product.objects.count(), 61)
+        draft_codes = {'prof_p1', 'prof_p7', 'prof_p9', 'cont_p1', 'cont_p4'}
+        self.assertEqual(set(Product.objects.filter(published=False).values_list('static_image', flat=True)), draft_codes)
+        call_command('import_ncct_content', verbosity=0)
+        self.assertEqual(Product.objects.count(), 61)
+        html = self.client.get('/products/led-lighting/').content.decode()
+        self.assertIn('class="category-nav"', html)
+        self.assertIn('aria-current="page" class="is-active"', html)
+        self.assertEqual(self.client.get('/en/Real/Led_lights.html').status_code, 301)
+        projects = self.client.get('/projects/')
+        self.assertContains(projects, 'Lighting reference')
+        self.assertNotContains(projects, 'Delivered project</span>')
+        self.assertContains(self.client.get(Project.objects.first().get_absolute_url()), 'Reference story')
+        self.assertContains(self.client.get('/about/'), 'about-hero')

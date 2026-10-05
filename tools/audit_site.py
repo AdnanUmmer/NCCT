@@ -20,7 +20,7 @@ from projects.models import Project
 
 client = Client()
 queue = deque(['/'])
-pages, assets, errors = {}, set(), []
+pages, assets, errors, titles = {}, set(), [], {}
 with override_settings(ALLOWED_HOSTS=['testserver'], SECURE_SSL_REDIRECT=False):
     while queue:
         path = queue.popleft()
@@ -36,10 +36,26 @@ with override_settings(ALLOWED_HOSTS=['testserver'], SECURE_SSL_REDIRECT=False):
                 errors.append(f'{path}: invalid PDF')
             response.close()
             continue
+        if getattr(response, 'streaming', False):
+            response.close()
+            continue
         soup = BeautifulSoup(response.content, 'html.parser')
         pages[path]['title'] = soup.title.get_text() if soup.title else None
         if len(soup.select('h1')) != 1:
             errors.append(f'{path}: H1 count')
+        titles.setdefault(pages[path]['title'], []).append(path)
+        desc = soup.find('meta', attrs={'name': 'description'})
+        if not desc or not 50 <= len(desc.get('content', '')) <= 170: errors.append(f'{path}: meta description length')
+        canon = soup.find('link', rel='canonical')
+        if not canon or not canon['href'].startswith('https://'): errors.append(f'{path}: canonical')
+        for prop in ('og:title', 'og:description', 'og:image', 'og:url'):
+            if not soup.find('meta', property=prop): errors.append(f'{path}: missing {prop}')
+        if not soup.find('meta', attrs={'name': 'twitter:card'}): errors.append(f'{path}: twitter card')
+        levels = [int(h.name[1]) for h in soup.select('h1,h2,h3,h4') if not h.find_parent(['dialog'])]
+        if any(b - a > 1 for a, b in zip(levels, levels[1:])): errors.append(f'{path}: heading skip {levels}')
+        for img in soup.select('img'):
+            if img.get('alt') is None: errors.append(f'{path}: img without alt {img.get("src")}')
+            if not (img.get('width') and img.get('height')): errors.append(f'{path}: img without dimensions {img.get("src")}')
         for block in soup.select('script[type="application/ld+json"]'):
             json.loads(block.string)
         for element in soup.select('[src], link[rel="stylesheet"], link[rel="icon"]'):
@@ -56,6 +72,12 @@ with override_settings(ALLOWED_HOSTS=['testserver'], SECURE_SSL_REDIRECT=False):
                 parsed = urlsplit(href)
                 if not parsed.query and parsed.path not in pages:
                     queue.append(parsed.path)
+errors += [f'duplicate title {k!r}: {v}' for k, v in titles.items() if len(v) > 1]
+with override_settings(ALLOWED_HOSTS=['testserver'], SECURE_SSL_REDIRECT=False, SITE_INDEXABLE=True):
+    import re
+    locs = re.findall(r'<loc>https://[^/]+(/[^<]*)</loc>', client.get('/sitemap.xml').content.decode())
+errors += [f'sitemap url not crawlable: {p}' for p in locs if pages.get(p, {}).get('status') != 200]
+errors += [f'not in sitemap: {p}' for p, v in pages.items() if v.get('title') and '/' in p and p not in locs and not p.startswith('/admin')]
 counts = {'products': Product.objects.count(), 'verified_model_products': Product.objects.exclude(model_reference='').filter(verified=True).count(),
           'categories': Category.objects.count(), 'verified_projects': Project.objects.filter(attribution_verified=True, published=True).count(),
           'unverified_editorial_images': Project.objects.filter(attribution_verified=False).count(),

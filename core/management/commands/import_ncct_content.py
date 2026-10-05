@@ -4,6 +4,8 @@ from urllib.parse import quote
 from django.db import transaction
 from core.models import Homepage, HomepageSeedState, ContentPage, Application, Resource
 from products.models import Category, Product, ProductSpecification
+from projects.models import Project, ProjectImage
+from core import catalogue_v2 as v2
 
 SOURCE = 'https://ncctdxb.com/en/do-pobrania-2/products.html'
 PRODUCTS = [
@@ -27,7 +29,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         _, created = HomepageSeedState.objects.get_or_create(key='catalogue-v1')
         if not created:
-            self.stdout.write('Catalogue already initialized; no records changed.')
+            self.stdout.write('Catalogue v1 already initialized.')
+            self.import_v2()
             return
         outdoor = Category.objects.filter(source_url='https://ncctdxb.com/en/Real/Outdoor_lights.html').first()
         if outdoor is None:
@@ -75,3 +78,56 @@ class Command(BaseCommand):
             approved = getattr(home, {'privacy': 'privacy_text', 'cookies': 'cookie_text', 'terms': 'terms_text'}[slug], '') if home else ''
             ContentPage.objects.get_or_create(slug=slug, defaults={'title': title, 'introduction': introduction, 'body': approved or body})
         self.stdout.write(self.style.SUCCESS('Imported reviewed catalogue content. Existing records preserved.'))
+        self.import_v2()
+
+    def import_v2(self):
+        """Add the remaining official NCCT categories/products and reference scenes once; never overwrite admin edits."""
+        _, created = HomepageSeedState.objects.get_or_create(key='catalogue-v2')
+        if not created:
+            self.stdout.write('Catalogue v2 already initialized; no records changed.')
+            return
+        cats = {}
+        legacy = {'indoor': 'indoor_lights', 'outdoor': 'Outdoor_lights', 'decorative': 'Decorative_lights',
+                  'industrial': 'industrial_lights', 'professional': 'professional_lights'}
+        for key, page in legacy.items():
+            cats[key] = Category.objects.filter(source_url=v2.BASE + page + '.html').first()
+        # prof_p1 carries a third-party brand mark, so it must not be a public cover image.
+        for model in (Category, Application):
+            model.objects.filter(static_image='prof_p1', image='').update(static_image='prof_p2')
+        top = Category.objects.order_by('-order').values_list('order', flat=True).first() or 0
+        for i, (key, name, description, page, image, alt) in enumerate(v2.CATEGORIES, 1):
+            url = v2.BASE + page
+            cat = Category.objects.filter(source_url=url).first() or Category.objects.filter(name=name).first()
+            if cat is None:
+                cat = Category.objects.create(name=name, description=description, source_url=url, static_image=image,
+                                              image_alt=alt, order=top + i)
+            cats[key] = cat
+            app, new = Application.objects.get_or_create(slug=cat.slug, defaults={
+                'name': cat.name, 'description': cat.description, 'source_url': url, 'static_image': image,
+                'image_alt': alt, 'order': cat.order})
+            if new: app.categories.add(cat)
+        base_order = (Product.objects.order_by('-order').values_list('order', flat=True).first() or 0) + 10
+        for i, (code, key, name, description, mounting, published) in enumerate(v2.PRODUCTS):
+            cat = cats.get(key)
+            if cat is None or Product.objects.filter(static_image=code).exists():
+                continue
+            obj = Product.objects.create(name=name, category=cat, description=description, static_image=code,
+                image_alt=name, source_url=v2.BASE + 'lightsfeatures.html', verified=True, published=published,
+                featured=False, order=base_order + i, mounting_type=mounting)
+            app = Application.objects.filter(slug=cat.slug).first()
+            if app: obj.applications.add(app)
+        alt_by_image = {ref[2]: ref[3] for ref in v2.PROJECT_REFERENCES}
+        for i, (title, application, cover, alt, description, gallery) in enumerate(v2.PROJECT_REFERENCES):
+            project = Project.objects.filter(static_image=cover).first() or Project.objects.filter(title=title).first()
+            if project is None:
+                project = Project.objects.create(title=title, application=application, static_image=cover, image_alt=alt,
+                    description=description, featured=i < 4, published=True, attribution_verified=False, order=i + 1)
+            else:
+                if not project.description:
+                    project.description = description
+                    project.save(update_fields=['description'])
+            if not project.gallery.exists():
+                for n, image in enumerate(gallery):
+                    ProjectImage.objects.create(project=project, static_image=image, image_alt=alt_by_image.get(image, alt), order=n)
+        self.stdout.write(self.style.SUCCESS('Imported official NCCT categories, product families and reference scenes.'))
+

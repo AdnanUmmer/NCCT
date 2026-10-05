@@ -19,7 +19,7 @@ class EnquiryForm(forms.ModelForm):
         widgets = {'name':forms.TextInput(attrs={'autocomplete':'name'}),
                    'company_name':forms.TextInput(attrs={'autocomplete':'organization'}),
                    'email':forms.EmailInput(attrs={'autocomplete':'email'}),
-                   'phone':forms.TextInput(attrs={'type':'tel','autocomplete':'tel','placeholder':'+971', 'pattern':r'\+?[0-9 ()\-]{7,31}'}),
+                   'phone':forms.TextInput(attrs={'type':'tel','autocomplete':'tel','placeholder':'+971', 'pattern':r'\+?[0-9 \(\)\-]{7,31}'}),
                    'message':forms.Textarea(attrs={'rows':3,'maxlength':4000})}
 
     def clean(self):

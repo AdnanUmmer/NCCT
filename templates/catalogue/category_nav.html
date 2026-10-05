@@ -1,0 +1,4 @@
+<nav class="category-nav" aria-label="Product categories"><div class="category-scroller"><button type="button" class="cat-arrow cat-prev" aria-label="Scroll categories left" hidden><span aria-hidden="true"></span></button><ul>
+<li><a href="/products/"{% if not category %} aria-current="page" class="is-active"{% endif %}><span>All products</span><small>{{ total_products }}</small></a></li>
+{% for cat in catalogue_categories %}{% if cat.product_total %}<li><a href="{{ cat.get_absolute_url }}"{% if category.pk == cat.pk %} aria-current="page" class="is-active"{% endif %}><span>{{ cat.name }}</span><small>{{ cat.product_total }}</small></a></li>{% endif %}{% endfor %}
+</ul><button type="button" class="cat-arrow cat-next" aria-label="Scroll categories right" hidden><span aria-hidden="true"></span></button></div></nav>

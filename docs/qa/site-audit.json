@@ -1,12 +1,12 @@
 {
   "counts": {
-    "products": 8,
+    "products": 61,
     "verified_model_products": 5,
-    "categories": 5,
+    "categories": 9,
     "verified_projects": 0,
-    "unverified_editorial_images": 3,
+    "unverified_editorial_images": 6,
     "resources": 5,
-    "solutions": 5
+    "solutions": 9
   },
   "pages": {
     "/": {
@@ -15,7 +15,7 @@
     },
     "/about/": {
       "status": 200,
-      "title": "About NCCT | NCCT"
+      "title": "About NCCT"
     },
     "/products/": {
       "status": 200,
@@ -35,7 +35,19 @@
     },
     "/contact/": {
       "status": 200,
-      "title": "Contact NCCT | NCCT"
+      "title": "Contact NCCT"
+    },
+    "/projects/the-architecture-of-atmosphere-1/": {
+      "status": 200,
+      "title": "The architecture of atmosphere | NCCT"
+    },
+    "/projects/a-path-quietly-defined-2/": {
+      "status": 200,
+      "title": "A path, quietly defined | NCCT"
+    },
+    "/projects/after-the-sun-goes-down-3/": {
+      "status": 200,
+      "title": "After the sun goes down | NCCT"
     },
     "/products/indoor-lighting-1/": {
       "status": 200,
@@ -56,6 +68,22 @@
     "/products/professional-lighting-5/": {
       "status": 200,
       "title": "Professional lighting | NCCT"
+    },
+    "/products/led-lighting/": {
+      "status": 200,
+      "title": "LED lighting | NCCT"
+    },
+    "/products/control-gear/": {
+      "status": 200,
+      "title": "Control gear | NCCT"
+    },
+    "/products/lamps/": {
+      "status": 200,
+      "title": "Lamps | NCCT"
+    },
+    "/products/emergency-lighting/": {
+      "status": 200,
+      "title": "Emergency lighting | NCCT"
     },
     "/products/indoor-lighting-1/ceiling-lighting-1/": {
       "status": 200,
@@ -101,6 +129,34 @@
       "status": 200,
       "title": "Wall recessed luminaire | NCCT"
     },
+    "/products/indoor-lighting-1/slim-round-surface-ceiling-light/": {
+      "status": 200,
+      "title": "Slim round surface ceiling light | NCCT"
+    },
+    "/products/indoor-lighting-1/chrome-wall-light-with-pull-cord/": {
+      "status": 200,
+      "title": "Chrome wall light with pull cord | NCCT"
+    },
+    "/products/indoor-lighting-1/aluminium-up-and-down-wall-light/": {
+      "status": 200,
+      "title": "Aluminium up-and-down wall light | NCCT"
+    },
+    "/products/indoor-lighting-1/woven-rattan-pendant-lights/": {
+      "status": 200,
+      "title": "Woven rattan pendant lights | NCCT"
+    },
+    "/projects/lit-stair-and-dining/": {
+      "status": 200,
+      "title": "Lit stair and dining | NCCT"
+    },
+    "/projects/warm-evening-living-room/": {
+      "status": 200,
+      "title": "Warm evening living room | NCCT"
+    },
+    "/projects/garden-courtyard-dining/": {
+      "status": 200,
+      "title": "Garden courtyard dining | NCCT"
+    },
     "/solutions/indoor-lighting-1/": {
       "status": 200,
       "title": "Indoor lighting solutions | NCCT"
@@ -121,6 +177,22 @@
       "status": 200,
       "title": "Professional lighting solutions | NCCT"
     },
+    "/solutions/led-lighting/": {
+      "status": 200,
+      "title": "LED lighting solutions | NCCT"
+    },
+    "/solutions/control-gear/": {
+      "status": 200,
+      "title": "Control gear solutions | NCCT"
+    },
+    "/solutions/lamps/": {
+      "status": 200,
+      "title": "Lamps solutions | NCCT"
+    },
+    "/solutions/emergency-lighting/": {
+      "status": 200,
+      "title": "Emergency lighting solutions | NCCT"
+    },
     "/resources/zoomled-bl1-datasheet/download/": {
       "status": 200
     },
@@ -135,8 +207,205 @@
     },
     "/resources/zoomled-l15-datasheet/download/": {
       "status": 200
+    },
+    "/static/images/homepg-5.webp": {
+      "status": 200
+    },
+    "/static/images/homepg-6.webp": {
+      "status": 200
+    },
+    "/static/images/pg-2.webp": {
+      "status": 200
+    },
+    "/static/images/pg-1.webp": {
+      "status": 200
+    },
+    "/static/images/homepg-1.webp": {
+      "status": 200
+    },
+    "/products/indoor-lighting-1/brass-globe-wall-light/": {
+      "status": 200,
+      "title": "Brass globe wall light | NCCT"
+    },
+    "/products/outdoor-lighting-2/oval-bulkhead-light/": {
+      "status": 200,
+      "title": "Oval bulkhead light | NCCT"
+    },
+    "/products/outdoor-lighting-2/square-framed-wall-light/": {
+      "status": 200,
+      "title": "Square framed wall light | NCCT"
+    },
+    "/products/outdoor-lighting-2/traditional-post-lantern/": {
+      "status": 200,
+      "title": "Traditional post lantern | NCCT"
+    },
+    "/products/outdoor-lighting-2/contemporary-lantern-wall-light/": {
+      "status": 200,
+      "title": "Contemporary lantern wall light | NCCT"
+    },
+    "/products/outdoor-lighting-2/barn-style-gooseneck-wall-light/": {
+      "status": 200,
+      "title": "Barn-style gooseneck wall light | NCCT"
+    },
+    "/products/outdoor-lighting-2/up-and-down-outdoor-wall-light/": {
+      "status": 200,
+      "title": "Up-and-down outdoor wall light | NCCT"
+    },
+    "/products/outdoor-lighting-2/pagoda-style-garden-lantern/": {
+      "status": 200,
+      "title": "Pagoda-style garden lantern | NCCT"
+    },
+    "/products/decorative-lighting-3/led-icicle-curtain-lights/": {
+      "status": 200,
+      "title": "LED icicle curtain lights | NCCT"
+    },
+    "/products/decorative-lighting-3/copper-wire-fairy-lights/": {
+      "status": 200,
+      "title": "Copper wire fairy lights | NCCT"
+    },
+    "/products/decorative-lighting-3/firework-burst-string-lights/": {
+      "status": 200,
+      "title": "Firework burst string lights | NCCT"
+    },
+    "/products/decorative-lighting-3/star-curtain-lights/": {
+      "status": 200,
+      "title": "Star curtain lights | NCCT"
+    },
+    "/products/decorative-lighting-3/wall-mounted-pattern-projection-lights/": {
+      "status": 200,
+      "title": "Wall-mounted pattern projection lights | NCCT"
+    },
+    "/products/decorative-lighting-3/petal-form-bamboo-pendant/": {
+      "status": 200,
+      "title": "Petal-form bamboo pendant | NCCT"
+    },
+    "/products/decorative-lighting-3/backlit-wooden-wall-panel/": {
+      "status": 200,
+      "title": "Backlit wooden wall panel | NCCT"
+    },
+    "/products/industrial-lighting-4/four-spot-ceiling-track-light/": {
+      "status": 200,
+      "title": "Four-spot ceiling track light | NCCT"
+    },
+    "/products/industrial-lighting-4/twin-retro-spot-ceiling-light/": {
+      "status": 200,
+      "title": "Twin retro spot ceiling light | NCCT"
+    },
+    "/products/industrial-lighting-4/caged-dome-semi-flush-light/": {
+      "status": 200,
+      "title": "Caged dome semi-flush light | NCCT"
+    },
+    "/products/industrial-lighting-4/mesh-cylinder-pendant-pair/": {
+      "status": 200,
+      "title": "Mesh cylinder pendant pair | NCCT"
+    },
+    "/products/industrial-lighting-4/theatre-style-barn-door-spot/": {
+      "status": 200,
+      "title": "Theatre-style barn door spot | NCCT"
+    },
+    "/products/industrial-lighting-4/three-light-glass-globe-vanity-light/": {
+      "status": 200,
+      "title": "Three-light glass globe vanity light | NCCT"
+    },
+    "/products/professional-lighting-5/led-panel-light-pair-with-stands/": {
+      "status": 200,
+      "title": "LED panel light pair with stands | NCCT"
+    },
+    "/products/professional-lighting-5/cob-led-par-light/": {
+      "status": 200,
+      "title": "COB LED par light | NCCT"
+    },
+    "/products/professional-lighting-5/led-soft-panel-with-barn-doors/": {
+      "status": 200,
+      "title": "LED soft panel with barn doors | NCCT"
+    },
+    "/products/professional-lighting-5/gobo-track-spotlight/": {
+      "status": 200,
+      "title": "Gobo track spotlight | NCCT"
+    },
+    "/products/professional-lighting-5/softbox-lighting-kit/": {
+      "status": 200,
+      "title": "Softbox lighting kit | NCCT"
+    },
+    "/products/professional-lighting-5/barn-door-panel-on-tall-stand/": {
+      "status": 200,
+      "title": "Barn door panel on tall stand | NCCT"
+    },
+    "/products/led-lighting/led-garden-path-lights/": {
+      "status": 200,
+      "title": "LED garden path lights | NCCT"
+    },
+    "/products/led-lighting/rgb-led-ring-wall-light/": {
+      "status": 200,
+      "title": "RGB LED ring wall light | NCCT"
+    },
+    "/products/led-lighting/square-module-led-ceiling-light/": {
+      "status": 200,
+      "title": "Square-module LED ceiling light | NCCT"
+    },
+    "/products/led-lighting/hexagon-led-ceiling-grid/": {
+      "status": 200,
+      "title": "Hexagon LED ceiling grid | NCCT"
+    },
+    "/products/led-lighting/twin-linear-led-wall-light/": {
+      "status": 200,
+      "title": "Twin linear LED wall light | NCCT"
+    },
+    "/products/led-lighting/gold-ring-led-ceiling-light/": {
+      "status": 200,
+      "title": "Gold ring LED ceiling light | NCCT"
+    },
+    "/products/control-gear/emergency-led-conversion-module/": {
+      "status": 200,
+      "title": "Emergency LED conversion module | NCCT"
+    },
+    "/products/control-gear/waterproof-led-power-supply-and-driver/": {
+      "status": 200,
+      "title": "Waterproof LED power supply and driver | NCCT"
+    },
+    "/products/lamps/spiral-led-table-lamp/": {
+      "status": 200,
+      "title": "Spiral LED table lamp | NCCT"
+    },
+    "/products/lamps/crescent-moon-table-lamp/": {
+      "status": 200,
+      "title": "Crescent moon table lamp | NCCT"
+    },
+    "/products/lamps/flexible-neck-desk-lamp/": {
+      "status": 200,
+      "title": "Flexible-neck desk lamp | NCCT"
+    },
+    "/products/lamps/rattan-shade-portable-table-lamp/": {
+      "status": 200,
+      "title": "Rattan-shade portable table lamp | NCCT"
+    },
+    "/products/emergency-lighting/twin-head-emergency-light-unit/": {
+      "status": 200,
+      "title": "Twin-head emergency light unit | NCCT"
+    },
+    "/products/emergency-lighting/exit-sign-with-emergency-heads/": {
+      "status": 200,
+      "title": "Exit sign with emergency heads | NCCT"
+    },
+    "/products/emergency-lighting/wet-location-twin-head-emergency-light/": {
+      "status": 200,
+      "title": "Wet-location twin-head emergency light | NCCT"
+    },
+    "/products/emergency-lighting/twin-lamp-emergency-light/": {
+      "status": 200,
+      "title": "Twin-lamp emergency light | NCCT"
+    },
+    "/products/emergency-lighting/twin-led-emergency-light/": {
+      "status": 200,
+      "title": "Twin LED emergency light | NCCT"
+    },
+    "/static/images/homepg-4.webp": {
+      "status": 200
+    },
+    "/static/images/homepg-3.webp": {
+      "status": 200
     }
   },
-  "assets_checked": 19,
+  "assets_checked": 84,
   "errors": []
 }

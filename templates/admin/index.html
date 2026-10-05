@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}{% load static ncct_admin %}
+{% block bodyclass %}dashboard{% endblock %}
+{% block content_title %}<h1>Welcome back, {% firstof user.get_short_name user.get_username %}</h1>{% endblock %}
+{% block content_subtitle %}<p class="subtitle">Manage the NCCT website: products, projects, brochures and enquiries.</p>{% endblock %}
+{% block content %}
+<div class="dash">
+ <section class="stats" aria-label="Overview">{% for label, count, url, ico in stats %}<a class="stat" href="{{ url }}"><span class="stat-ico">{% icon ico 20 %}</span><span class="stat-num">{{ count }}</span><span class="stat-label">{{ label }}</span></a>{% endfor %}</section>
+
+ <section class="card" aria-labelledby="qa-h"><div class="card-head"><h2 id="qa-h">Quick actions</h2></div>
+  <div class="quick">{% for label, url, ico in quick %}<a class="btn btn-primary" href="{{ url }}">{% icon ico 16 %}{{ label }}</a>{% endfor %}<a class="btn btn-outline" href="/" target="_blank" rel="noopener">{% icon 'external' 16 %}View website</a></div>
+  {% for label, n, url in drafts %}<p class="note"><a href="{{ url }}">{{ n }} {{ label }}</a> not visible on the website.</p>{% endfor %}
+ </section>
+
+ <div class="dash-grid">
+  <section class="card" aria-labelledby="re-h"><div class="card-head"><h2 id="re-h">Recent enquiries</h2><a href="{% url 'admin:enquiries_enquiry_changelist' %}">View all</a></div>
+   {% for e in recent_enquiries %}<a class="row-item" href="{% url 'admin:enquiries_enquiry_change' e.pk %}"><span class="avatar sm">{{ e.name|slice:":1"|upper }}</span><span class="row-main"><strong>{{ e.name }}</strong><small>{{ e.company_name }} · {{ e.project_type|default:"General" }}</small></span><span class="row-side"><span class="badge {% if e.status == 'new' %}badge-new{% elif e.status == 'contacted' %}badge-info{% else %}badge-muted{% endif %}">{{ e.get_status_display }}</span><small>{{ e.created_at|date:"j M, H:i" }}</small></span></a>{% empty %}<p class="empty">No enquiries yet. They will appear here when visitors use the contact form.</p>{% endfor %}
+  </section>
+  <section class="card" aria-labelledby="rp-h"><div class="card-head"><h2 id="rp-h">Recently edited products</h2><a href="{% url 'admin:products_product_changelist' %}">View all</a></div>
+   {% for p in recent_products %}<a class="row-item" href="{% url 'admin:products_product_change' p.pk %}"><img class="thumb" src="{{ p.image_small_url|default:p.image_url }}" alt="" width="44" height="44" loading="lazy"><span class="row-main"><strong>{{ p.name }}</strong><small>{{ p.category.name }}</small></span><span class="row-side"><span class="badge {% if p.published %}badge-ok{% else %}badge-muted{% endif %}">{% if p.published %}Published{% else %}Draft{% endif %}</span><small>{{ p.updated_at|date:"j M" }}</small></span></a>{% empty %}<p class="empty">No products yet.</p>{% endfor %}
+  </section>
+  <section class="card" aria-labelledby="rj-h"><div class="card-head"><h2 id="rj-h">Recently edited projects</h2><a href="{% url 'admin:projects_project_changelist' %}">View all</a></div>
+   {% for p in recent_projects %}<a class="row-item" href="{% url 'admin:projects_project_change' p.pk %}"><img class="thumb" src="{{ p.image_small_url|default:p.image_url }}" alt="" width="44" height="44" loading="lazy"><span class="row-main"><strong>{{ p.title }}</strong><small>{{ p.location|default:p.application|default:"—" }}</small></span><span class="row-side"><span class="badge {% if p.published %}badge-ok{% else %}badge-muted{% endif %}">{% if p.published %}Published{% else %}Draft{% endif %}</span><small>{{ p.updated_at|date:"j M" }}</small></span></a>{% empty %}<p class="empty">No projects yet.</p>{% endfor %}
+  </section>
+  <section class="card" aria-labelledby="rr-h"><div class="card-head"><h2 id="rr-h">Recent brochures &amp; resources</h2><a href="{% url 'admin:core_resource_changelist' %}">View all</a></div>
+   {% for r in recent_resources %}<a class="row-item" href="{% url 'admin:core_resource_change' r.pk %}"><span class="doc-ico">{% icon 'file' 20 %}</span><span class="row-main"><strong>{{ r.title }}</strong><small>{{ r.get_document_type_display }}</small></span><span class="row-side"><span class="badge {% if r.published %}badge-ok{% else %}badge-muted{% endif %}">{% if r.published %}Published{% else %}Draft{% endif %}</span><small>{{ r.updated_at|date:"j M" }}</small></span></a>{% empty %}<p class="empty">No resources yet.</p>{% endfor %}
+  </section>
+ </div>
+</div>
+{% endblock %}
