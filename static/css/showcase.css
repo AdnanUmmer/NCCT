@@ -113,3 +113,31 @@ html{scrollbar-gutter:stable}
 .cat-arrow:focus-visible{outline:2px solid var(--navy);outline-offset:-4px;border-radius:6px}
 @media(prefers-reduced-motion:reduce){.category-nav ul{scroll-behavior:auto}}
 .doc-cover{width:72px;height:96px;object-fit:cover;border:1px solid #d8d3c8;flex:none;margin-right:18px}
+
+/* Projects listing only: native column masonry keeps cards together in DOM order.
+   Intrinsic dimensions reserve space before images arrive; no JS reflow needed. */
+#showcase .showcase-masonry{
+  display:block;
+  column-count:3;
+  column-gap:28px;
+  column-fill:balance;
+}
+#showcase .showcase-masonry .showcase-card{
+  display:block;
+  width:100%;
+  margin:0 0 28px;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+#showcase .showcase-masonry .showcase-media{
+  aspect-ratio:var(--project-aspect,4/3);
+}
+#showcase .showcase-masonry .showcase-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+@media(min-width:1600px){#showcase .showcase-masonry{column-count:4}}
+@media(max-width:1000px){#showcase .showcase-masonry{column-count:2;column-gap:24px}#showcase .showcase-masonry .showcase-card{margin-bottom:24px}}
+@media(max-width:600px){#showcase .showcase-masonry{column-count:1}#showcase .showcase-masonry .showcase-card{margin-bottom:24px}}
