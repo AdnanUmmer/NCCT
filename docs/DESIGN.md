@@ -2,7 +2,7 @@
 
 ## Narrative
 
-Floating navigation → atmospheric architectural hero → concise company introduction → five-category explorer → large photographic perspectives (verified projects when available) → numbered capabilities → optional verified metrics → three product families → enquiry CTA → corporate footer.
+Floating navigation, atmospheric architectural hero, concise company introduction, five-category explorer, large photographic perspectives (verified projects when available), numbered capabilities, optional verified metrics, three product families, enquiry call to action and corporate footer.
 
 Projects receive a full-width lead image plus a staggered secondary pair. Until the attribution is verified, the section explicitly presents lighting perspectives. No false credibility counters are used.
 

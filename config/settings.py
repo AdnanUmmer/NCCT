@@ -63,7 +63,7 @@ if ON_RENDER or os.environ.get('DJANGO_TRUST_PROXY_SSL') == '1':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ENQUIRY_MIN_SECONDS = 3
 ENQUIRY_RATE_LIMIT = 10
-# Optional dotted callable(request) -> bool; integrate Turnstile verification here.
+# Optional dotted callable(request) returning bool; integrate Turnstile verification here.
 ENQUIRY_BOT_VERIFIER = ''
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 

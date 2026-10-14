@@ -110,7 +110,7 @@ ncct/
 - **Products:** upload an image and enter a family or confirmed model, category, description and supported technical details. Only verified, featured records appear.
 - **Capabilities:** edit the numbered expandable rows.
 - **Verified metrics:** provide a source and explicitly publish. None are seeded because no reliable business metrics were found.
-- **Enquiries:** search by company/name/email, filter by project type/date/status, update New → Contacted → Closed. Submitted personal information is read-only in the admin. No email is sent by this implementation; submissions are stored for staff review.
+- **Enquiries:** search by company/name/email, filter by project type/date/status, update New, Contacted, Closed. Submitted personal information is read-only in the admin. No email is sent by this implementation; submissions are stored for staff review.
 
 Use the upload field for replacements; `static_image` is the basename of a bundled source asset. Upload JPEG, PNG, WebP or AVIF under 5 MB, with descriptive alt text. Optimise replacement images before upload; automatic derivative generation for admin uploads is not included. Bundled images have small and full WebP variants. Missing image fields render an explicitly labelled development placeholder.
 

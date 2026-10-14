@@ -3,7 +3,7 @@
   <nav class="desktop-nav" aria-label="Primary navigation">
     <a href="/" {% if request.path == "/" %}aria-current="page"{% endif %}>Home</a><a href="/about/" {% if request.path == "/about/" %}aria-current="page"{% endif %}>About</a><a href="/products/" {% if request.path == "/products/" %}aria-current="page"{% endif %}>Products</a><a href="/projects/" {% if request.path == "/projects/" %}aria-current="page"{% endif %}>Projects</a><a href="/solutions/" {% if request.path == "/solutions/" %}aria-current="page"{% endif %}>Solutions</a><a href="/resources/" {% if request.path == "/resources/" %}aria-current="page"{% endif %}>Resources</a><a href="/contact/" {% if request.path == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
   </nav>
-  <a href="#enquiry" class="button nav-enquire" data-enquire>Enquire <span aria-hidden="true">↗</span></a>
+  <a href="#enquiry" class="button nav-enquire" data-enquire>Enquire</a>
   <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation">

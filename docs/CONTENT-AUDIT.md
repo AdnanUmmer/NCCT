@@ -32,7 +32,7 @@ Source HTML snapshots and `assets.json` are included for traceability. Utilities
 
 ## Reference study
 
-- **LuxeLED** — https://www.luxeled.com/: product discovery and named project presentation establish a clear products → work narrative. Adopted separation of products/projects, not its layout or content.
+- **LuxeLED** — https://www.luxeled.com/: product discovery and named project presentation establish a clear products and work narrative. Adopted separation of products/projects, not its layout or content.
 - **Thorn** — https://www.thornlighting.com/en: organised indoor/outdoor/controls discovery, case-study context and technical information. Web extraction returned 403; the browser successfully exposed the page and its navigation. Adopted application-led grouping and specifier access.
 - **Zumtobel Group** — https://z.lighting/en/group/company/: large photographic editorial frame, direct hierarchy and restrained corporate navigation. Visually inspected in the browser. Adopted scale, whitespace and corporate clarity without borrowing credentials or page design.
 
