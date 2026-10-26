@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page_title|default:'NCCT — Architectural & Professional Lighting' }}</title>
   <meta name="description" content="{{ meta_description }}">
-  <meta name="theme-color" content="#0B1E34">
+  <meta name="theme-color" content="#20231f">
   <link rel="canonical" href="{{ canonical }}">
   {% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
   {% firstof og_title page_title as ogt %}{% firstof og_description meta_description as ogd %}
@@ -15,10 +15,11 @@
   {% if content.google_verification %}<meta name="google-site-verification" content="{{ content.google_verification }}">{% endif %}
   {% if content.bing_verification %}<meta name="msvalidate.01" content="{{ content.bing_verification }}">{% endif %}
   {% if ga4_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ ga4_id }}',{anonymize_ip:true});</script>{% endif %}
-  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="icon" href="{% static 'images/ncct-favicon.png' %}" type="image/png">
   <link rel="stylesheet" href="{% static 'css/site.css' %}">
   <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
   <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
+  <link rel="stylesheet" href="{% static 'css/brand.css' %}">
   <script src="{% static 'js/site.js' %}" defer></script>
   <script src="{% static 'js/showcase.js' %}" defer></script>
   {% block head %}{% endblock %}
