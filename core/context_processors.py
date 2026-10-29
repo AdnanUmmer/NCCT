@@ -9,7 +9,7 @@ from enquiries.security import issue_token
 def site_content(request):
     if request.path.startswith('/admin/'):
         return {}
-    content = getattr(request, '_homepage', None) or Homepage.objects.first() or Homepage(static_image='single-light-v2')
+    content = getattr(request, '_homepage', None) or Homepage.objects.first() or Homepage(static_image='hero')
     return {'content': content, 'site_url': settings.SITE_URL,
             'page_title': content.seo_title, 'meta_description': content.seo_description,
             'canonical': settings.SITE_URL + request.path,

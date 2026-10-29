@@ -63,8 +63,8 @@ class Command(BaseCommand):
             if new: doc.products.add(obj)
         home = Homepage.objects.first()
         ContentPage.objects.get_or_create(slug='about', defaults={'title': 'About NCCT',
-            'introduction': home.introduction if home else 'Architectural and professional lighting in Dubai.',
-            'body': 'People · Places · Progress\n\nExplore indoor, outdoor, decorative, industrial and professional lighting. Contact the NCCT team in Business Bay, Dubai, to discuss products and project requirements.'})
+            'introduction': '',
+            'body': 'At NCCT, we believe lighting is more than illumination — it is an essential element of architecture that shapes spaces, enhances experiences, and brings environments to life. With a focus on quality, innovation, and contemporary design, we aim to deliver lighting solutions that combine functionality with lasting visual appeal.\n\nOur approach is rooted in understanding how light interacts with architecture and the people who experience each space. From sophisticated interiors and commercial environments to outdoor landscapes and public spaces, we focus on lighting that balances performance, efficiency, and aesthetics.\n\nEvery project has its own identity and purpose. Through thoughtful design and attention to detail, we strive to create lighting experiences that not only illuminate spaces but elevate the way they are seen and experienced.'})
         # Factual operational notices, not invented contractual terms. Client legal review required.
         defaults = {
             'privacy': ('Privacy information', 'How website enquiries are handled.',
@@ -130,4 +130,3 @@ class Command(BaseCommand):
                 for n, image in enumerate(gallery):
                     ProjectImage.objects.create(project=project, static_image=image, image_alt=alt_by_image.get(image, alt), order=n)
         self.stdout.write(self.style.SUCCESS('Imported official NCCT categories, product families and reference scenes.'))
-

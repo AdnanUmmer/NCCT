@@ -26,7 +26,7 @@ class HomepageSeedingTests(TestCase):
         self.assertEqual(Product.objects.filter(featured=True, verified=True).count(), 3)
         self.assertEqual(Capability.objects.count(), 4)
         self.assertEqual(VerifiedMetric.objects.count(), 0)
-        self.assertEqual(Homepage.objects.get().static_image, 'single-light-v2')
+        self.assertEqual(Homepage.objects.get().static_image, 'hero')
         before = self.snapshot()
         self.seed()
         self.assertEqual(before, self.snapshot())

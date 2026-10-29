@@ -1,5 +1,15 @@
 # QA — 28 September 2026
 
+## Follow-up visual refinement — 28 October 2026
+
+- Django system checks passed; `makemigrations --check --dry-run` reported no model changes.
+- `collectstatic --noinput` completed successfully; all 59 Django tests passed.
+- `tools/audit_site.py` checked 102 routes and 85 static assets with no errors.
+- Browser layout checks covered the homepage, About, Products, Projects, Solutions, Resources, Contact, a project detail, a product detail and Privacy at 1920, 1440, 1024, 768, 390 and 320 px. No horizontal overflow or missing page headings were found.
+- Visually inspected the homepage hero and product listing at desktop and mobile widths. The desktop and dedicated mobile hero WebP images loaded; the mobile navigation and solution tabs remained functional.
+- The hero image and media bounds match the full hero section at all six tested widths, with `object-fit: cover`; nine representative content pages also passed desktop and mobile overflow and heading checks.
+- About section visually inspected at 1440 px and 390 px: the loaded image follows the landscape crop, stays proportionate to the desktop copy, and stacks below the copy on mobile. Layout measurements at 1440, 1024, 768, 390 and 320 px found no horizontal overflow.
+
 ## Executed and passed
 
 - Django 5.2.17 system checks: zero issues.

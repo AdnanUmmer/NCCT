@@ -21,13 +21,13 @@ class Command(BaseCommand):
         for model, empty in initialize.items():
             if not empty:
                 self.stdout.write(f'Preserving existing {model.__name__} records.')
-        Homepage.objects.get_or_create(pk=1, defaults={'static_image':'single-light-v2','image_alt':'Concept image of a single bronze pendant casting warm light onto stone','hero_caption':'Single light study / Generated concept','hero_copy':'Considered lighting for architecture.\nFrom a single detail to the entire space.'})
+        Homepage.objects.get_or_create(pk=1, defaults={'static_image':'hero','image_alt':'Architectural luminaires against dark stone with warm integrated lighting','hero_caption':'Architectural lighting, considered in context','hero_copy':'Considered lighting for architecture.\nFrom a single detail to the entire space.'})
         categories = [
             ('Indoor lighting','Light for interiors, from the ambient layer to the architectural detail.','homepg-6','Warm living room with perimeter ceiling lighting','indoor_lights'),
-            ('Outdoor lighting','Light that gives exterior spaces a clear sense of place.','homepg-2','Illuminated steps and curved garden paths','Outdoor_lights'),
+            ('Outdoor lighting','Light that gives exterior spaces a clear sense of place.','outside','Exterior path and landscape illuminated with warm architectural lighting','Outdoor_lights'),
             ('Decorative lighting','Distinctive light, as part of the interior composition.','homepg-4','Interior with pendant and integrated linear lighting','Decorative_lights'),
-            ('Industrial lighting','Explore the industrial lighting selection with our team.','indus_p1','Black suspended industrial-style luminaire','industrial_lights'),
-            ('Professional lighting','Discover lighting for professional applications.','prof_p1','Professional lighting equipment from the NCCT catalogue','professional_lights')]
+            ('Industrial lighting','Explore the industrial lighting selection with our team.','industrial','Modern industrial lighting in a high-bay warehouse','industrial_lights'),
+            ('Professional lighting','Discover lighting for professional applications.','professional','Professional studio lighting equipment in a production space','professional_lights')]
         saved = []
         for order,(name,description,image,alt,slug) in enumerate(categories):
             if initialize[Category]:
@@ -36,9 +36,9 @@ class Command(BaseCommand):
                 obj = Category.objects.filter(name=name).first()
             saved.append(obj)
         for order,(title,application,image,alt) in enumerate([
-            ('The architecture of atmosphere','Interior lighting','homepg-4','Warm open-plan interior with linear ceiling lighting and pendant fixtures'),
-            ('A path, quietly defined','Outdoor lighting','homepg-2','Curved outdoor steps defined by warm linear lighting'),
-            ('After the sun goes down','Landscape lighting','homepg-3','Terraced garden and trees illuminated after dark')]):
+            ('The architecture of atmosphere','Interior lighting','architecture','Warm architectural interior with sculptural lighting and illuminated landscape'),
+            ('A path, quietly defined','Outdoor lighting','street','Illuminated city street and skyline at night'),
+            ('After the sun goes down','Landscape lighting','sundown','Garden terraces illuminated after sunset')]):
             if initialize[Project]:
                 Project.objects.get_or_create(title=title,defaults={'application':application,'static_image':image,'image_alt':alt,'source_url':'https://ncctdxb.com/en/index.html','order':order,'attribution_verified':False,'featured':True})
         for order,(title,description) in enumerate([

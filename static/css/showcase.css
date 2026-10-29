@@ -64,7 +64,7 @@
 .about-hero{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,80px);align-items:center;padding:12px 0 72px}
 .about-hero .lede{font-size:clamp(17px,1.5vw,21px);line-height:1.7;color:var(--muted);max-width:56ch}
 .about-hero-media{margin:0;position:relative}.about-hero-media::before{content:"";position:absolute;inset:24px -18px -18px 24px;border:1px solid var(--champagne);z-index:0}
-.about-hero-media img{position:relative;z-index:1;width:100%;height:clamp(340px,46vw,620px);object-fit:cover;display:block}
+.about-hero-media img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block}
 .about-story{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(28px,5vw,80px);padding:56px 0;border-top:1px solid var(--line)}
 .about-story h2{font-size:clamp(30px,4vw,56px);line-height:1.1;color:var(--navy);margin:8px 0}
 .metric-row{display:flex;flex-wrap:wrap;gap:48px;padding:40px 0;border-top:1px solid var(--line)}
@@ -94,7 +94,7 @@
 .topic:hover,.topic:focus-visible{background:#ffffff1f;border-color:var(--champagne)}
 .topic small{color:#c3cad4}
 @media(max-width:1000px){.showcase-grid,.tile-grid{grid-template-columns:repeat(2,1fr)}.value-grid{grid-template-columns:repeat(2,1fr)}.showcase-hero,.about-hero,.about-story,.contact-layout,.project-layout,.lead-project{grid-template-columns:1fr}.hero-stats{justify-content:flex-start}.facts{position:static}}
-@media(max-width:600px){.showcase-grid,.tile-grid,.value-grid,.contact-cards,.topic-grid{grid-template-columns:1fr}.gallery-mosaic{grid-template-columns:1fr 1fr}.gallery-mosaic figure:first-child{grid-column:span 2;grid-row:auto}.category-nav{top:84px}.showcase-card:nth-child(3n+1) .showcase-media{aspect-ratio:4/3}.lead-project img{min-height:260px}}
+@media(max-width:600px){.showcase-grid,.tile-grid,.value-grid,.contact-cards,.topic-grid{grid-template-columns:1fr}.gallery-mosaic{grid-template-columns:1fr 1fr}.gallery-mosaic figure:first-child{grid-column:span 2;grid-row:auto}.category-nav{top:84px}.showcase-card:nth-child(3n+1) .showcase-media{aspect-ratio:4/3}.lead-project img{min-height:260px}.about-hero-media img{aspect-ratio:4/3}}
 @media(prefers-reduced-motion:reduce){.showcase-media img,.tile img,.lead-project img{transition:none}}
 .chips a:visited,.category-nav a:visited{color:var(--navy)}.chips a.is-active:visited,.category-nav a.is-active:visited{color:#fff}
 html{scrollbar-gutter:stable}

@@ -2,7 +2,7 @@ VPS hosting: see [the complete Ubuntu deployment guide](docs/VPS-DEPLOYMENT.md).
 
 # NCCT corporate lighting website
 
-Django catalogue, applications, verified projects, downloads, enquiries and content administration. The approved single-light homepage is preserved.
+Django catalogue, applications, verified projects, downloads, enquiries and content administration, with a responsive architectural-lighting homepage hero.
 
 ## Run locally
 
@@ -88,7 +88,7 @@ ncct/
   static/
     css/site.css          design tokens + responsive components
     js/site.js            dialogs, categories, fetch form, navigation
-    images/               locally stored, optimised NCCT source imagery
+    images/               locally stored, optimised NCCT source imagery and responsive hero crops
   media/                  administrator uploads (created on first upload)
   docs/
     CONTENT-AUDIT.md     provenance, reference study, missing content

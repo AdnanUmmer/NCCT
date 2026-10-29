@@ -9,9 +9,9 @@ BASE = 'https://ncctdxb.com/en/Real/'
 # key, name, description, source page, hero image, alt text
 CATEGORIES = [
     ('led', 'LED lighting', 'Contemporary LED luminaires: ring, linear, hexagon and colour-changing forms.', 'Led_lights.html', 'led_p6', 'Gold LED ring ceiling luminaire'),
-    ('control', 'Control gear', 'Drivers, controllers and power supplies for LED lighting systems.', 'Control_Gears.html', 'cont_p3', 'LED driver and power supply units'),
+    ('control', 'Control gear', 'Drivers, controllers and power supplies for LED lighting systems.', 'Control_Gears.html', 'control', 'Lighting control gear and smart lighting equipment'),
     ('lamps', 'Lamps', 'Table and portable lamps for living, working and hospitality settings.', 'Lamps.html', 'lamp_p1', 'Spiral LED table lamp'),
-    ('emergency', 'Emergency lighting', 'Emergency luminaires and exit signage.', 'Emergency.html', 'emer_p5', 'Twin-head emergency luminaire'),
+    ('emergency', 'Emergency lighting', 'Emergency luminaires and exit signage.', 'Emergency.html', 'emergency', 'Emergency exit signage and lighting in a stairwell'),
 ]
 LEGACY = {'led': 'Led_lights', 'control': 'Control_Gears', 'lamps': 'Lamps', 'emergency': 'Emergency'}
 

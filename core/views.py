@@ -10,7 +10,7 @@ from enquiries.security import issue_token
 
 @never_cache
 def home(request, form=None, form_status=200):
-    content = Homepage.objects.first() or Homepage(static_image='homepg-5', image_alt='Interior with integrated ceiling and stair lighting')
+    content = Homepage.objects.first() or Homepage(static_image='hero', image_alt='Architectural luminaires against dark stone with warm integrated lighting')
     request._homepage = content
     categories = list(Category.objects.filter(published=True))
     projects = list(Project.objects.filter(featured=True, published=True)[:3])
