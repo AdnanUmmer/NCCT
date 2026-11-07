@@ -1,7 +1,7 @@
 {% load static %}<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page_title|default:'NCCT — Architectural & Professional Lighting' }}</title>
   <meta name="description" content="{{ meta_description }}">
   <meta name="theme-color" content="#20231f">
@@ -20,9 +20,13 @@
   <link rel="stylesheet" href="{% static 'css/catalogue.css' %}">
   <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
   <link rel="stylesheet" href="{% static 'css/brand.css' %}">
+  <link rel="stylesheet" href="{% static 'css/editorial.css' %}">
+  <link rel="stylesheet" href="{% static 'css/hero-navigation.css' %}">
   <script src="{% static 'js/site.js' %}" defer></script>
   <script src="{% static 'js/showcase.js' %}" defer></script>
   {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'css/product-presentation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/page-shell.css' %}">
 </head>
 <body class="{% if request.path != '/' %}inner-page{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>

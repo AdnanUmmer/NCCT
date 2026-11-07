@@ -1,13 +1,15 @@
-{% load static %}<header class="site-header" id="site-header">
-  <a class="brand" href="/" aria-label="NCCT home"><img class="brand-logo" src="{% static 'images/ncct-brand-logo-transparent.webp' %}" alt="NCCT" width="950" height="724"></a>
-  <nav class="desktop-nav" aria-label="Primary navigation">
-    <a href="/" {% if request.path == "/" %}aria-current="page"{% endif %}>Home</a><a href="/about/" {% if request.path == "/about/" %}aria-current="page"{% endif %}>About</a><a href="/products/" {% if request.path == "/products/" %}aria-current="page"{% endif %}>Products</a><a href="/projects/" {% if request.path == "/projects/" %}aria-current="page"{% endif %}>Projects</a><a href="/solutions/" {% if request.path == "/solutions/" %}aria-current="page"{% endif %}>Solutions</a><a href="/resources/" {% if request.path == "/resources/" %}aria-current="page"{% endif %}>Resources</a><a href="/contact/" {% if request.path == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
-  </nav>
-  <a href="#enquiry" class="button nav-enquire" data-enquire>Enquire</a>
-  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
+{% load static %}
+<header class="site-header ncct-header{% if request.path != "/" %} is-compact{% endif %}" id="site-header" data-compact="{% if request.path != "/" %}always{% else %}scroll{% endif %}">
+  <a class="brand" href="{% url 'home' %}" aria-label="NCCT home">
+    <img class="brand-logo" src="{% static 'images/ncct-logo-yellow-transparent.png' %}" alt="NCCT" width="926" height="700">
+    <svg class="brand-mark" viewBox="0 0 926 490" aria-hidden="true" focusable="false"><defs><clipPath id="ncct-navbar-mark-clip"><rect width="926" height="490" /></clipPath></defs><image clip-path="url(#ncct-navbar-mark-clip)" href="{% static 'images/ncct-logo-yellow-transparent.png' %}" width="926" height="700" /></svg>
+  </a>
+  <nav class="desktop-nav" aria-label="Primary navigation">{% include 'partials/nav_links.html' %}</nav>
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span class="sr-only">Menu</span></button>
 </header>
-<dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation">
-  <div class="menu-top"><span class="eyebrow">NCCT</span><button class="close-button" type="button" data-close aria-label="Close navigation">×</button></div>
-  <nav aria-label="Mobile navigation"><a href="/" {% if request.path == "/" %}aria-current="page"{% endif %}>Home</a><a href="/about/" {% if request.path == "/about/" %}aria-current="page"{% endif %}>About</a><a href="/products/" {% if request.path == "/products/" %}aria-current="page"{% endif %}>Products</a><a href="/projects/" {% if request.path == "/projects/" %}aria-current="page"{% endif %}>Projects</a><a href="/solutions/" {% if request.path == "/solutions/" %}aria-current="page"{% endif %}>Solutions</a><a href="/resources/" {% if request.path == "/resources/" %}aria-current="page"{% endif %}>Resources</a><a href="/contact/" {% if request.path == "/contact/" %}aria-current="page"{% endif %}>Contact</a></nav>
-  <p class="eyebrow">People · Places · Progress</p>
+<dialog class="mobile-menu nav-panel" id="mobile-menu" aria-label="NCCT navigation">
+  <div class="menu-top"><a href="{% url 'home' %}" aria-label="NCCT home"><img src="{% static 'images/ncct-logo-yellow-transparent.png' %}" alt="NCCT" width="926" height="700"></a><p class="eyebrow">Explore NCCT</p><button class="close-button" type="button" data-close aria-label="Close navigation" autofocus>×</button></div>
+  <nav aria-label="Expanded navigation">{% include 'partials/nav_links.html' with include_home=True %}</nav>
+  <div class="nav-panel-footer"><p>Light. Architecture. Possibility.</p><a href="{% url 'contact' %}">Enquire</a></div>
 </dialog>
+<noscript><details class="nav-fallback"><summary>Menu</summary><nav aria-label="Navigation">{% include 'partials/nav_links.html' with include_home=True %}</nav></details></noscript>

@@ -30,16 +30,16 @@
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips a{padding:10px 18px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--navy);font-size:13px;min-height:44px;display:inline-flex;align-items:center}
 .chips a.is-active,.chips a:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-.showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.showcase-card a{display:block;text-decoration:none;color:inherit}
+.showcase-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:stretch}
+.showcase-card{display:flex;min-width:0;flex-direction:column;border-bottom:1px solid var(--line)}
+.showcase-card a{display:flex;flex:1;flex-direction:column;text-decoration:none;color:inherit}
 .showcase-media{position:relative;overflow:hidden;aspect-ratio:4/3;background:#e9e6dd}
 .showcase-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block}
 .showcase-card a:hover img,.showcase-card a:focus-visible img{transform:scale(1.05)}
 .showcase-media .badge{position:absolute;left:14px;top:14px}
-.showcase-info{padding:18px 2px}
+.showcase-info{padding:18px 2px;display:flex;flex:1;flex-direction:column;border-bottom:0}
 .showcase-info h3{margin:6px 0 10px;font-size:22px;color:var(--navy)}
-.showcase-card:nth-child(3n+1) .showcase-media{aspect-ratio:3/4}
-.showcase-card:nth-child(3n+1){grid-row:span 1}
+.showcase-info .text-link{align-self:flex-start;margin-top:auto}
 .disclosure{margin:56px 0 0;padding:18px 22px;border-left:3px solid var(--champagne);background:#fff;color:var(--muted);line-height:1.6;font-size:14px}
 .cta-band{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;margin:72px 0 24px;padding:clamp(32px,5vw,64px);background:var(--navy);color:#fff;border-radius:4px}
 .cta-band h2{color:#fff;margin:6px 0 0;font-size:clamp(26px,3.4vw,44px)}.cta-band .eyebrow{color:var(--champagne)}
@@ -114,23 +114,35 @@ html{scrollbar-gutter:stable}
 @media(prefers-reduced-motion:reduce){.category-nav ul{scroll-behavior:auto}}
 .doc-cover{width:72px;height:96px;object-fit:cover;border:1px solid #d8d3c8;flex:none;margin-right:18px}
 
-/* Projects listing only: native column masonry keeps cards together in DOM order.
-   Intrinsic dimensions reserve space before images arrive; no JS reflow needed. */
+/* Projects listing uses consistent image frames and card alignment. */
 #showcase .showcase-masonry{
-  display:block;
-  column-count:3;
-  column-gap:28px;
-  column-fill:balance;
+  grid-template-columns:repeat(3,minmax(0,1fr));
 }
 #showcase .showcase-masonry .showcase-card{
-  display:block;
-  width:100%;
-  margin:0 0 28px;
-  break-inside:avoid;
-  page-break-inside:avoid;
+  min-width:0;
 }
 #showcase .showcase-masonry .showcase-media{
-  aspect-ratio:var(--project-aspect,4/3);
+  aspect-ratio:4/3;
+}
+#showcase .showcase-masonry .showcase-info>.eyebrow{
+  min-height:1.6em;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#showcase .showcase-masonry .showcase-info h3{
+  display:-webkit-box;
+  min-height:2.5em;
+  overflow:hidden;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+#showcase .showcase-masonry .showcase-info .card-description{
+  display:-webkit-box;
+  min-height:4.95em;
+  overflow:hidden;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
 }
 #showcase .showcase-masonry .showcase-media img{
   width:100%;
@@ -138,6 +150,6 @@ html{scrollbar-gutter:stable}
   object-fit:cover;
   object-position:center;
 }
-@media(min-width:1600px){#showcase .showcase-masonry{column-count:4}}
-@media(max-width:1000px){#showcase .showcase-masonry{column-count:2;column-gap:24px}#showcase .showcase-masonry .showcase-card{margin-bottom:24px}}
-@media(max-width:600px){#showcase .showcase-masonry{column-count:1}#showcase .showcase-masonry .showcase-card{margin-bottom:24px}}
+@media(min-width:1600px){#showcase .showcase-masonry{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:1000px){#showcase .showcase-masonry{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}}
+@media(max-width:600px){#showcase .showcase-masonry{grid-template-columns:1fr}}

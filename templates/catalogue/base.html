@@ -2,9 +2,9 @@
 {% block head %}{% json_ld schema %}{% endblock %}
 {% block body %}
 {% include 'partials/navbar.html' %}
-<main id="main" class="catalogue-main container">
+<main id="main" class="catalogue-main{% block main_class %}{% endblock %}">
 <nav class="breadcrumbs" aria-label="Breadcrumb"><ol>{% for label,url in breadcrumbs %}<li>{% if not forloop.last %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>
 {% block content %}{% endblock %}
 </main>
-{% include 'partials/footer.html' %}{% include 'partials/enquiry_modal.html' %}
+{% include 'partials/footer.html' %}{% block enquiry %}{% include 'partials/enquiry_modal.html' %}{% endblock %}
 {% endblock %}

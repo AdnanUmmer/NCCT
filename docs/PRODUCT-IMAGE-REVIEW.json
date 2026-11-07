@@ -1,0 +1,368 @@
+[
+  {
+    "id": 1,
+    "name": "Ceiling lighting",
+    "source": "static\\images\\ind_p1.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 2,
+    "name": "Wall lighting",
+    "source": "static\\images\\ind_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 3,
+    "name": "Pendant lighting",
+    "source": "static\\images\\indus_p1.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 4,
+    "name": "Bollard luminaire",
+    "source": "static\\images\\zoomled-bl1.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 5,
+    "name": "Inground luminaire",
+    "source": "static\\images\\zoomled-el8-el2.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 6,
+    "name": "Floor marker luminaire",
+    "source": "static\\images\\zoomled-el12a.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 7,
+    "name": "Spot luminaire",
+    "source": "static\\images\\zoomled-l6-l10.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 8,
+    "name": "Wall recessed luminaire",
+    "source": "static\\images\\zoomled-l15.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 9,
+    "name": "Slim round surface ceiling light",
+    "source": "static\\images\\ind_p2.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 10,
+    "name": "Chrome wall light with pull cord",
+    "source": "static\\images\\ind_p4.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 11,
+    "name": "Aluminium up-and-down wall light",
+    "source": "static\\images\\ind_p5.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 12,
+    "name": "Woven rattan pendant lights",
+    "source": "static\\images\\ind_p6.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 13,
+    "name": "Brass globe wall light",
+    "source": "static\\images\\ind_p7.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 14,
+    "name": "Oval bulkhead light",
+    "source": "static\\images\\out_p1.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 15,
+    "name": "Square framed wall light",
+    "source": "static\\images\\out_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 16,
+    "name": "Traditional post lantern",
+    "source": "static\\images\\out_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 17,
+    "name": "Contemporary lantern wall light",
+    "source": "static\\images\\out_p4.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 18,
+    "name": "Barn-style gooseneck wall light",
+    "source": "static\\images\\out_p5.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 19,
+    "name": "Up-and-down outdoor wall light",
+    "source": "static\\images\\out_p6.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 20,
+    "name": "Pagoda-style garden lantern",
+    "source": "static\\images\\out_p7.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 21,
+    "name": "LED icicle curtain lights",
+    "source": "static\\images\\deco_p1.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 22,
+    "name": "Copper wire fairy lights",
+    "source": "static\\images\\deco_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 23,
+    "name": "Firework burst string lights",
+    "source": "static\\images\\deco_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 24,
+    "name": "Star curtain lights",
+    "source": "static\\images\\deco_p4.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 25,
+    "name": "Wall-mounted pattern projection lights",
+    "source": "static\\images\\deco_p5.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 26,
+    "name": "Petal-form bamboo pendant",
+    "source": "static\\images\\deco_p6.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 27,
+    "name": "Backlit wooden wall panel",
+    "source": "static\\images\\deco_p7.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 28,
+    "name": "Four-spot ceiling track light",
+    "source": "static\\images\\indus_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 29,
+    "name": "Twin retro spot ceiling light",
+    "source": "static\\images\\indus_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 30,
+    "name": "Caged dome semi-flush light",
+    "source": "static\\images\\indus_p4.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 31,
+    "name": "Mesh cylinder pendant pair",
+    "source": "static\\images\\indus_p5.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 32,
+    "name": "Theatre-style barn door spot",
+    "source": "static\\images\\indus_p6.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 33,
+    "name": "Three-light glass globe vanity light",
+    "source": "static\\images\\indus_p8.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 34,
+    "name": "RGB panel light kit with stands",
+    "source": "static\\images\\prof_p1.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 35,
+    "name": "LED panel light pair with stands",
+    "source": "static\\images\\prof_p2.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 36,
+    "name": "COB LED par light",
+    "source": "static\\images\\prof_p3.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 37,
+    "name": "LED soft panel with barn doors",
+    "source": "static\\images\\prof_p4.webp",
+    "status": "Approved transparent variant after visual review; original foreground RGB preserved."
+  },
+  {
+    "id": 38,
+    "name": "Gobo track spotlight",
+    "source": "static\\images\\prof_p5.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 39,
+    "name": "Softbox lighting kit",
+    "source": "static\\images\\prof_p6.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 40,
+    "name": "Octagonal softbox studio light",
+    "source": "static\\images\\prof_p7.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 41,
+    "name": "Barn door panel on tall stand",
+    "source": "static\\images\\prof_p8.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 42,
+    "name": "Studio LED light with reflector",
+    "source": "static\\images\\prof_p9.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 43,
+    "name": "LED garden path lights",
+    "source": "static\\images\\led_p1.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 44,
+    "name": "RGB LED ring wall light",
+    "source": "static\\images\\led_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 45,
+    "name": "Square-module LED ceiling light",
+    "source": "static\\images\\led_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 46,
+    "name": "Hexagon LED ceiling grid",
+    "source": "static\\images\\led_p4.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 47,
+    "name": "Twin linear LED wall light",
+    "source": "static\\images\\led_p5.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 48,
+    "name": "Gold ring LED ceiling light",
+    "source": "static\\images\\led_p6.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 49,
+    "name": "Wireless lighting control unit",
+    "source": "static\\images\\cont_p1.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 50,
+    "name": "Emergency LED conversion module",
+    "source": "static\\images\\cont_p2.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 51,
+    "name": "Waterproof LED power supply and driver",
+    "source": "static\\images\\cont_p3.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 52,
+    "name": "Linear LED driver",
+    "source": "static\\images\\cont_p4.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 53,
+    "name": "Spiral LED table lamp",
+    "source": "static\\images\\lamp_p1.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 54,
+    "name": "Crescent moon table lamp",
+    "source": "static\\images\\lamp_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 55,
+    "name": "Flexible-neck desk lamp",
+    "source": "static\\images\\lamp_p3.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 56,
+    "name": "Rattan-shade portable table lamp",
+    "source": "static\\images\\lamp_p4.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 57,
+    "name": "Twin-head emergency light unit",
+    "source": "static\\images\\emer_p1.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 58,
+    "name": "Exit sign with emergency heads",
+    "source": "static\\images\\emer_p2.webp",
+    "status": "Original retained: architectural/environmental or illuminated application image; background removal deliberately excluded."
+  },
+  {
+    "id": 59,
+    "name": "Wet-location twin-head emergency light",
+    "source": "static\\images\\emer_p3.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 60,
+    "name": "Twin-lamp emergency light",
+    "source": "static\\images\\emer_p4.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  },
+  {
+    "id": 61,
+    "name": "Twin LED emergency light",
+    "source": "static\\images\\emer_p5.webp",
+    "status": "Manual review required: pale or transparent components, fine supports/wires, or low-contrast background; original retained to avoid damage."
+  }
+]

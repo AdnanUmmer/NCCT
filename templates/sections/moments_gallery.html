@@ -1,0 +1,28 @@
+{% if items %}
+<section class="section surface lighting-moments full-bleed" id="{{ gallery_id }}" aria-labelledby="{{ gallery_id }}-title" data-lighting-gallery>
+  <header class="container moments-intro">
+    <div><p class="eyebrow">{{ eyebrow }}</p><h2 id="{{ gallery_id }}-title">{{ heading }}</h2></div>
+    <p>{{ description }}</p>
+    <a class="moments-skip" href="#{{ gallery_id }}-end">Skip the gallery</a>
+  </header>
+  <div class="moments-runway">
+    <div class="moments-pin">
+      <div class="moments-viewport" aria-label="{{ gallery_label }}">
+        <ul class="moments-track">
+          {% for item in items %}
+          <li class="moment-card" {% if project_cards %}data-project="{{ item.slug }}"{% else %}data-category="{{ item.slug }}"{% endif %}>
+            <a class="moment-link" href="{{ item.get_absolute_url }}" aria-labelledby="{{ gallery_id }}-card-{{ item.pk }}">
+              <img src="{{ item.image_url }}" alt="{% if project_cards %}{{ item.image_alt|default:item.title }}{% else %}{{ item.image_alt|default:item.name }}{% endif %}" width="600" height="800" loading="lazy" decoding="async">
+              <span class="moment-number" aria-hidden="true">{{ forloop.counter|stringformat:'02d' }} / {{ items|length|stringformat:'02d' }}</span>
+              <div class="moment-caption"><p>{% if project_cards %}{% if item.attribution_verified %}Delivered project{% else %}Lighting reference{% endif %}{% if item.application %} / {{ item.application }}{% endif %}{% else %}NCCT / Lighting collection{% endif %}</p><h3 id="{{ gallery_id }}-card-{{ item.pk }}">{% if project_cards %}{{ item.title }}{% else %}{{ item.name }}{% endif %}</h3><span class="moment-explore">{% if project_cards %}{% if item.attribution_verified %}Explore Project{% else %}View Reference{% endif %}{% else %}Explore collection{% endif %}</span></div>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="container moments-meta" aria-hidden="true"><span class="moments-hint">Swipe to explore</span><span class="moments-progress"><span></span></span><span class="moments-index">01 <span>/ {{ items|length|stringformat:'02d' }}</span></span></div>
+    </div>
+  </div>
+  <div class="container moments-end" id="{{ gallery_id }}-end"><p>{{ closing }}</p><a class="{% if project_cards %}button button-navy{% else %}text-link{% endif %}" href="{{ all_url }}">{{ all_label }}{% if project_cards %} {% include 'partials/chevron.html' %}{% endif %}</a></div>
+</section>
+{% endif %}

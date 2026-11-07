@@ -13,11 +13,13 @@ class HomepageTests(TestCase):
         response=self.client.get('/')
         self.assertEqual(response.status_code,200)
         text=response.content.decode()
-        self.assertIn('Light that<br>shapes space.',text)
+        self.assertIn('SHAPES SPACE',text)
+        self.assertIn('Explore Solutions',text)
+        self.assertIn('hero-period',text)
         self.assertIn('application/ld+json',text)
         schema=json.loads(text.split('<script type="application/ld+json">')[1].split('</script>')[0])
         self.assertEqual(schema['@graph'][0]['name'],'NCCT')
-        self.assertIn('await confirmation',text)
+        self.assertIn('Every Space Deserves',text)
 
     def test_seed_is_idempotent_and_keeps_edits(self):
         content=Homepage.objects.get();content.hero_heading='Edited heading';content.save()

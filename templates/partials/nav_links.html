@@ -1,0 +1,7 @@
+{% if include_home %}<a href="{% url 'home' %}" {% if request.path == '/' %}aria-current="page"{% endif %}>Home</a>{% endif %}
+<a href="{% url 'products' %}" {% if '/products/' in request.path %}aria-current="page"{% endif %}>Products</a>
+<a href="{% url 'solutions' %}" {% if '/solutions/' in request.path %}aria-current="page"{% endif %}>Solutions</a>
+<a href="{% url 'projects' %}" {% if '/projects/' in request.path %}aria-current="page"{% endif %}>Projects</a>
+<a href="{% url 'resources' %}" {% if '/resources/' in request.path %}aria-current="page"{% endif %}>Resources</a>
+<a href="{% url 'content-page' slug='about' %}" {% if request.path == '/about/' %}aria-current="page"{% endif %}>About</a>
+<a class="nav-contact" href="{% url 'contact' %}" {% if request.path == '/contact/' %}aria-current="page"{% endif %}>Contact</a>

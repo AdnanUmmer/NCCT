@@ -15,6 +15,15 @@ class Category(ImageContent, Publishable):
     def __str__(self): return self.name
 
 class Product(ImageContent, Publishable):
+    @property
+    def image_url(self):
+        from .presentation import product_image_url
+        return product_image_url(self, super().image_url)
+
+    @property
+    def image_small_url(self):
+        return self.image_url
+
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
@@ -36,6 +45,11 @@ class Product(ImageContent, Publishable):
     def get_absolute_url(self): return reverse('product-detail', args=[self.category.slug, self.slug])
 
 class ProductImage(ImageContent):
+    @property
+    def image_url(self):
+        from .presentation import product_image_url
+        return product_image_url(self, super().image_url)
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery')
     caption = models.CharField(max_length=160, blank=True)
     order = models.PositiveSmallIntegerField(default=0)

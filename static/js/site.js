@@ -1,11 +1,31 @@
 (function() {
   'use strict';
-  const header = document.querySelector('.site-header');
-  const hero = document.querySelector('.hero');
-  if (header && hero) {
-    new IntersectionObserver(function([entry]) {
-      header.classList.toggle('scrolled', !entry.isIntersecting);
-    }, { rootMargin: '-100px 0px 0px 0px' }).observe(hero);
+  if (window.ncctSiteReady) return;
+  window.ncctSiteReady = true;
+  const header = document.querySelector('.ncct-header');
+  if (header) {
+    header.classList.add('nav-ready');
+    const alwaysCompact = header.dataset.compact === 'always';
+    let compact = header.classList.contains('is-compact'), navFrame = 0;
+    const nav = header.querySelector('.desktop-nav');
+    const toggle = header.querySelector('.menu-toggle');
+    nav.inert = compact;
+    function updateHeader() {
+      navFrame = 0;
+      const next = alwaysCompact || window.scrollY > (compact ? 112 : 144);
+      if (next === compact) return;
+      compact = next;
+      header.classList.toggle('is-compact', compact);
+      // Hidden desktop links must not remain keyboard-focusable inside the capsule.
+      nav.inert = compact;
+      if (compact && nav.contains(document.activeElement)) toggle.focus({preventScroll:true});
+      if (!compact && window.innerWidth > 1000 && document.activeElement === toggle) header.querySelector('.brand').focus({preventScroll:true});
+    }
+    window.addEventListener('scroll', function() {
+      if (!navFrame) navFrame = requestAnimationFrame(updateHeader);
+    }, {passive:true});
+    window.addEventListener('pageshow', updateHeader);
+    updateHeader();
   }
 
   let returnFocus = null;
@@ -13,6 +33,12 @@
   const menu = document.querySelector('#mobile-menu');
   function openDialog(dialog, trigger) {
     if (!dialog) return;
+    if (typeof dialog.showModal !== 'function') {
+      dialog.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      const first = dialog.querySelector('input:not([type="hidden"]):not([name="website"])');
+      if (first) first.focus({ preventScroll: true });
+      return;
+    }
     returnFocus = trigger || document.activeElement;
     dialog.showModal();
     document.body.classList.add('modal-open');
@@ -60,9 +86,6 @@
       });
     });
   }
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 900 && menu && menu.open) menu.close();
-  });
 
   const tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
   function selectTab(tab) {

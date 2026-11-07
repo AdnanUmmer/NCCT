@@ -1,0 +1,9 @@
+/* Shared decorative chevrons and product-only image surfaces. */
+.link-chevron{display:inline-block;width:16px;height:16px;flex:0 0 16px;vertical-align:middle;transition:transform .18s,color .18s}
+a:hover .link-chevron{transform:translateX(3px)}
+#solutions .application-tile-link:hover .application-arrow{transform:none}
+body .catalogue-image,body .detail-image,body .selection-image,body .gallery-grid a{background:#f0f0e7;border-color:transparent}
+body .catalogue-image img,body .detail-image img,body .selection-image img,body .gallery-grid img{object-fit:contain;object-position:center;padding:24px;mix-blend-mode:normal}
+body .catalogue-image{aspect-ratio:1.15}body .detail-image{aspect-ratio:1.15}body .gallery-grid img{width:100%;height:130px;padding:12px}
+@media(max-width:540px){body .catalogue-image img,body .detail-image img,body .selection-image img{padding:16px}}
+@media(prefers-reduced-motion:reduce){.link-chevron{transition:none}a:hover .link-chevron{transform:none}}

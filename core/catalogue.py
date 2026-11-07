@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.cache import never_cache
 from .models import Application, Capability, ContentPage, PageContent, Resource, Homepage, VerifiedMetric
 from .page_defaults import PAGE_DEFAULTS
+from .editorial import GUIDES, GUIDE_BY_SLUG, FAQS, solution_copy, application_links
 from products.models import Category, Product
 from projects.models import Project
 
@@ -34,6 +35,17 @@ def page_content(key):
     for field in ('eyebrow', 'heading', 'intro', 'seo_title', 'seo_description', 'cta_eyebrow', 'cta_heading', 'cta_text'):
         if not getattr(pc, field) and defaults.get(field):
             setattr(pc, field, defaults[field])
+    revisions = {
+        'projects': ('Lighting in Context.', 'Explore lighting references that demonstrate how illumination can shape interiors, outdoor spaces, architectural features and landscaped environments.'),
+        'solutions': ('Lighting Solutions for Every Environment.', 'Explore lighting applications for contemporary interiors, outdoor architecture, commercial spaces, industrial environments and specialist settings.'),
+        'resources': ('Technical Resources & Lighting Knowledge.', 'Explore lighting product documentation and essential technical information to support informed product selection.'),
+        'contact': ("Let's Discuss Your Lighting Requirements.", 'Whether you are exploring products, reviewing technical details or planning lighting for a particular environment, share your requirements with the NCCT team.'),
+        'products': ('Lighting Products', 'Browse by category, compare available technical details and find the right product for your application.'),
+    }
+    if key in revisions:
+        for field, value in zip(('heading', 'intro'), revisions[key]):
+            if getattr(pc, field) == defaults.get(field):
+                setattr(pc, field, value)
     return pc
 
 
@@ -114,9 +126,10 @@ def products(request, category_slug=None):
     qs = qs.order_by('name', 'pk') if sort == 'name' else qs.order_by('order', 'pk')
     pager = Paginator(qs, 12).get_page(request.GET.get('page'))
     params = request.GET.copy(); params.pop('page', None)
+    request._footer_categories = list(nav_categories())
     pc = page_content('products')
     title = category.name if category else pc.heading
-    context = {'listing': pager, 'category': category, 'catalogue_categories': nav_categories(), 'total_products': public_products().count(),
+    context = {'listing': pager, 'category': category, 'catalogue_categories': request._footer_categories, 'total_products': public_products().count(),
                'filters': filters, 'q': q, 'selected_category': selected_category, 'sort': sort,
                'query_string': params.urlencode(), 'heading': title}
     return page(request, 'catalogue/products.html', title,
@@ -143,7 +156,7 @@ def projects(request):
     sector = request.GET.get('sector', '')
     qs = base.filter(application=sector) if sector else base
     qs = qs.order_by('-featured', 'order', 'pk')
-    lead = None if sector or request.GET.get('page') else qs.filter(featured=True).first()
+    lead = None  # Every reference belongs in the compact, consistently filtered listing.
     pager = Paginator(qs.exclude(pk=lead.pk) if lead else qs, 9).get_page(request.GET.get('page'))
     pc = page_content('projects')
     return page(request, 'catalogue/projects.html', pc.heading, pc.seo_description,
@@ -166,13 +179,22 @@ def solutions(request, slug=None):
     if slug:
         obj = get_object_or_404(Application, published=True, slug=slug)
         return page(request, 'catalogue/solution.html', obj.name + ' solutions', 'Explore ' + obj.name.lower() + ' applications and connected product categories with NCCT. ' + obj.description,
-                    {'solution': obj, 'solution_categories': obj.categories.filter(published=True),
+                    {'solution': obj, 'solution_guide':solution_copy(obj.name), 'solution_categories': obj.categories.filter(published=True),
                      'related_products': public_products().filter(applications=obj),
                      'related_projects': public_projects().filter(applications=obj)}, obj,
                     [('Solutions', '/solutions/'), (obj.name, obj.get_absolute_url())])
+    applications = list(Application.objects.filter(published=True))
+    for application in applications:
+        application.editorial = solution_copy(application.name)
+    explorer = application_links(applications)
+    for item in explorer:
+        matched = next((obj for obj in applications if obj.get_absolute_url() == item['solution_url']), None)
+        item['guide'] = matched.editorial if matched else None
+        item['solution_name'] = matched.name if matched else ''
+        item['categories'] = matched.categories.filter(published=True) if matched else []
     pc = page_content('solutions')
     return page(request, 'catalogue/solutions.html', pc.heading, pc.seo_description,
-                {'applications': Application.objects.filter(published=True)}, crumbs=[('Solutions', '/solutions/')], schema_type='CollectionPage', pc=pc)
+                {'applications': applications, 'application_links':explorer}, crumbs=[('Solutions', '/solutions/')], schema_type='CollectionPage', pc=pc)
 
 
 @never_cache
@@ -181,9 +203,13 @@ def resources(request):
     types = [(key, label) for key, label in Resource.TYPES if qs.filter(document_type=key).exists()]
     kind = request.GET.get('type', '')
     if kind: qs = qs.filter(document_type=kind)
+    q = request.GET.get('q', '').strip()[:200]
+    if q: qs = qs.filter(Q(title__icontains=q) | Q(description__icontains=q))
+    guides = [g for g in GUIDES if not q or q.casefold() in (' '.join([g['title'],g['intro'],g['group']] + [text for heading,text in g['sections']])).casefold()]
+    groups = [(name, [g for g in guides if g['group']==name]) for name in ('Technical guides','Lighting selection','Application knowledge','Insights')]
     pc = page_content('resources')
     return page(request, 'catalogue/resources.html', pc.heading, pc.seo_description,
-                {'documents': qs, 'resource_types': types, 'selected_type': kind}, crumbs=[('Resources', '/resources/')], schema_type='CollectionPage', pc=pc)
+                {'documents': qs, 'resource_types': types, 'selected_type': kind, 'q':q, 'guide_groups':groups, 'guide_count':len(guides), 'faqs':FAQS}, crumbs=[('Resources', '/resources/')], schema_type='CollectionPage', pc=pc)
 
 
 def download(request, slug):
@@ -210,8 +236,7 @@ def content_page(request, slug):
     obj = get_object_or_404(ContentPage, slug=slug, published=True)
     context = {'page': obj, 'capabilities': Capability.objects.all() if slug == 'about' else []}
     if slug == 'about':
-        context.update(about_categories=nav_categories(), metrics=VerifiedMetric.objects.filter(published=True),
-                       about_projects=public_projects().order_by('-featured', 'order', 'pk')[:3])
+        context['about_projects'] = public_projects().exclude(image='', static_image='').order_by('-featured', 'order', 'pk')[:4]
         context['cta'] = page_content('about')
         return page(request, 'catalogue/about.html', obj.title, obj.introduction, context, obj, [(obj.title, obj.get_absolute_url())])
     return page(request, 'catalogue/page.html', obj.title, obj.introduction, context, obj, [(obj.title, obj.get_absolute_url())])
@@ -221,3 +246,29 @@ def content_page(request, slug):
 def contact(request):
     pc = page_content('contact')
     return page(request, 'catalogue/contact.html', pc.heading, pc.seo_description, crumbs=[('Contact', '/contact/')], schema_type='ContactPage', pc=pc)
+
+
+@never_cache
+def guide(request, slug):
+    article = GUIDE_BY_SLUG.get(slug)
+    if article is None:
+        raise Http404('Guide unavailable')
+    return page(request, 'catalogue/guide.html', article['title'], article['intro'],
+                {'guide':article, 'related_guides':[g for g in GUIDES if g['group']==article['group'] and g['slug']!=slug][:3]},
+                crumbs=[('Resources','/resources/'),(article['title'],request.path)], schema_type='Article')
+
+
+def application_detail(request, slug):
+    from .application_content import APPLICATION_BY_SLUG
+    guidance = APPLICATION_BY_SLUG.get(slug)
+    if guidance is None:
+        raise Http404
+    query = Q()
+    for key in guidance['keys']:
+        query |= Q(name__icontains=key)
+    categories = Category.objects.filter(published=True).filter(query)
+    solutions = Application.objects.filter(published=True).filter(query)
+    products = public_products().filter(category__in=categories)[:6]
+    return page(request, 'catalogue/application.html', guidance['title'] + ' lighting', guidance['intro'],
+                {'application': guidance, 'categories': categories, 'solutions': solutions, 'related_products': products},
+                crumbs=[('Solutions', '/solutions/'), (guidance['title'], request.path)])

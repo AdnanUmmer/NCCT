@@ -2,7 +2,8 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
-from .models import Homepage, Capability, VerifiedMetric
+from .models import Homepage, Capability, VerifiedMetric, Application
+from .editorial import GUIDES, solution_copy, application_links
 from products.models import Category, Product
 from projects.models import Project
 from enquiries.forms import EnquiryForm
@@ -13,8 +14,14 @@ def home(request, form=None, form_status=200):
     content = Homepage.objects.first() or Homepage(static_image='hero', image_alt='Architectural luminaires against dark stone with warm integrated lighting')
     request._homepage = content
     categories = list(Category.objects.filter(published=True))
+    for category in categories:
+        category.editorial = solution_copy(category.name)
+    solutions = list(Application.objects.filter(published=True))
+    hero_heading = content.hero_heading
+    if hero_heading in ('Light that\nshapes space.', 'Light that shapes space.'):
+        hero_heading = 'Beyond Illumination. Into Architecture.'
     projects = list(Project.objects.filter(featured=True, published=True)[:3])
-    context = {'content':content, 'categories':categories, 'projects':projects,
+    context = {'hero_heading':hero_heading, 'editorial_hero': hero_heading == 'Beyond Illumination. Into Architecture.', 'lighting_applications':application_links(solutions), 'home_guides':[g for g in GUIDES if g['slug'] in ('colour-temperature','beam-angle','ip-ratings','controls-dimming')], 'content':content, 'categories':categories, 'projects':projects,
         'projects_verified': bool(projects) and all(p.attribution_verified for p in projects),
         'products':Product.objects.filter(featured=True, verified=True, published=True, category__published=True).select_related('category')[:4],
         'capabilities':Capability.objects.all(), 'metrics':VerifiedMetric.objects.filter(published=True),

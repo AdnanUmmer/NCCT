@@ -1,0 +1,71 @@
+{
+  "html": "<section class=\"section surface lighting-moments is-scroll-gallery\" id=\"collections\" aria-labelledby=\"moments-title\" data-lighting-gallery=\"\" style=\"--moment-runway: 2757px; --moment-progress: 0.528795609152752;\">\n  <header class=\"container moments-intro\">\n    <div><p class=\"eyebrow\">02 / Our lighting collections</p><h2 id=\"moments-title\">Lighting for Every Moment</h2></div>\n    <p>From contemporary interiors to architectural exteriors, explore lighting solutions designed for different spaces, applications and experiences.</p>\n    <a class=\"moments-skip\" href=\"#collections-end\">Skip the gallery</a>\n  </header>\n  <div class=\"moments-runway\">\n    <div class=\"moments-pin\">\n      <div class=\"moments-viewport\" aria-label=\"Lighting collections\">\n        <ul class=\"moments-track\" style=\"transform: translate3d(-1013.09px, 0px, 0px);\">\n          \n          <li class=\"moment-card\" data-category=\"indoor-lighting-1\" style=\"transform: perspective(1200px) translateY(12px) rotateY(16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/indoor-lighting-1/\" aria-labelledby=\"moment-title-1\">\n              <img src=\"/static/images/homepg-6.webp\" alt=\"Warm living room with perimeter ceiling lighting\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">01 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-1\">Indoor lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"outdoor-lighting-2\" style=\"transform: perspective(1200px) translateY(12px) rotateY(16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/outdoor-lighting-2/\" aria-labelledby=\"moment-title-2\">\n              <img src=\"/static/images/outside.webp\" alt=\"Exterior path and landscape illuminated with warm architectural lighting\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">02 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-2\">Outdoor lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"decorative-lighting-3\" style=\"transform: perspective(1200px) translateY(12px) rotateY(16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/decorative-lighting-3/\" aria-labelledby=\"moment-title-3\">\n              <img src=\"/static/images/homepg-4.webp\" alt=\"Interior with pendant and integrated linear lighting\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">03 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-3\">Decorative lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"industrial-lighting-4\" style=\"transform: perspective(1200px) translateY(5.57087px) rotateY(7.42783deg) scale(0.979109);\">\n            <a class=\"moment-link\" href=\"/products/industrial-lighting-4/\" aria-labelledby=\"moment-title-4\">\n              <img src=\"/static/images/industrial.webp\" alt=\"Modern industrial lighting in a high-bay warehouse\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">04 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-4\">Industrial lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"professional-lighting-5\" data-active=\"\" style=\"transform: perspective(1200px) translateY(1.14415px) rotateY(-1.52554deg) scale(0.995709);\">\n            <a class=\"moment-link\" href=\"/products/professional-lighting-5/\" aria-labelledby=\"moment-title-5\">\n              <img src=\"/static/images/professional.webp\" alt=\"Professional studio lighting equipment in a production space\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">05 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-5\">Professional lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"led-lighting\" style=\"transform: perspective(1200px) translateY(7.85918px) rotateY(-10.4789deg) scale(0.970528);\">\n            <a class=\"moment-link\" href=\"/products/led-lighting/\" aria-labelledby=\"moment-title-6\">\n              <img src=\"/static/images/led_p6.webp\" alt=\"Gold LED ring ceiling luminaire\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">06 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-6\">LED lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"control-gear\" style=\"transform: perspective(1200px) translateY(12px) rotateY(-16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/control-gear/\" aria-labelledby=\"moment-title-7\">\n              <img src=\"/static/images/control.webp\" alt=\"Lighting control gear and smart lighting equipment\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">07 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-7\">Control gear</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"lamps\" style=\"transform: perspective(1200px) translateY(12px) rotateY(-16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/lamps/\" aria-labelledby=\"moment-title-8\">\n              <img src=\"/static/images/lamp_p1.webp\" alt=\"Spiral LED table lamp\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">08 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-8\">Lamps</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n          <li class=\"moment-card\" data-category=\"emergency-lighting\" style=\"transform: perspective(1200px) translateY(12px) rotateY(-16deg) scale(0.955);\">\n            <a class=\"moment-link\" href=\"/products/emergency-lighting/\" aria-labelledby=\"moment-title-9\">\n              <img src=\"/static/images/emergency.webp\" alt=\"Emergency exit signage and lighting in a stairwell\" width=\"600\" height=\"800\" loading=\"lazy\" decoding=\"async\">\n              <span class=\"moment-number\" aria-hidden=\"true\">09 / 09</span>\n              <div class=\"moment-caption\"><p>NCCT / Lighting collection</p><h3 id=\"moment-title-9\">Emergency lighting</h3><span class=\"moment-explore\">Explore collection</span></div>\n            </a>\n          </li>\n          \n        </ul>\n      </div>\n      <div class=\"container moments-meta\" aria-hidden=\"true\"><span class=\"moments-hint\">Scroll to discover</span><span class=\"moments-progress\"><span></span></span><span class=\"moments-index\">05 <span>/ 09</span></span></div>\n    </div>\n  </div>\n  <div class=\"container moments-end\" id=\"collections-end\"><p>Find the right light for your space.</p><a class=\"text-link\" href=\"/products/\">Explore the complete lighting collection</a></div>\n</section>",
+  "css": [
+    {
+      "class": "moments-viewport",
+      "width": "1351px",
+      "height": "534px",
+      "gap": "normal"
+    },
+    {
+      "class": "moments-track",
+      "width": "3506.94px",
+      "height": "534px",
+      "gap": "18px"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    },
+    {
+      "class": "moment-card",
+      "width": "360px",
+      "height": "480px",
+      "gap": "normal"
+    }
+  ]
+}

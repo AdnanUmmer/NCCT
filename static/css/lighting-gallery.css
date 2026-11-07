@@ -1,0 +1,51 @@
+/* Shared by all lighting galleries. Native horizontal scrolling is the baseline. */
+.lighting-moments{--moment-width:clamp(248px,27vw,360px);--moment-gap:18px;--moment-inset:clamp(20px,4.5vw,72px);padding-block:64px 44px;position:relative}
+.lighting-moments .moments-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:24px 64px;align-items:end;margin-bottom:30px;position:relative}
+.lighting-moments .moments-intro h2{font-size:clamp(32px,3.7vw,52px);max-width:600px;line-height:1.08;margin:0}
+.lighting-moments .moments-intro>p{max-width:58ch;font-size:15px;line-height:1.7;color:var(--muted);margin:0 0 3px}
+.lighting-moments .moments-skip{position:absolute;left:0;top:0;transform:translateY(-180%);opacity:0;pointer-events:none;padding:10px 16px;background:var(--brand-ink);color:#fff;z-index:5}
+.lighting-moments .moments-skip:focus{transform:translateY(0);opacity:1;pointer-events:auto}
+.lighting-moments .moments-viewport{width:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-padding-inline:var(--moment-inset);overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--brand-olive) transparent}
+.lighting-moments .moments-track{display:flex;gap:var(--moment-gap);width:max-content;list-style:none;margin:0;padding:24px var(--moment-inset) 30px;align-items:center}
+.lighting-moments .moment-card{flex:0 0 var(--moment-width);width:var(--moment-width);aspect-ratio:3/4;scroll-snap-align:center;position:relative;transform-origin:center center}
+.lighting-moments .moment-link{display:block;width:100%;height:100%;position:relative;overflow:hidden;border-radius:5px;background:var(--brand-ink);color:#fff;text-decoration:none;isolation:isolate;box-shadow:0 10px 24px #17201e12;transition:box-shadow .25s}
+.lighting-moments .moment-link:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#060d101c,transparent 30%,#060d1020 48%,#060d10e8 100%);pointer-events:none;z-index:1}
+.lighting-moments .moment-link img{position:absolute;inset:0;width:100%;height:100%;padding:0;object-fit:cover;object-position:center;transition:transform .55s cubic-bezier(.2,.65,.3,1)}
+.lighting-moments .moment-card[data-category="indoor-lighting-1"] img{object-position:60% center}
+.lighting-moments .moment-card[data-category="decorative-lighting-3"] img{object-position:42% center}
+.lighting-moments .moment-number{position:absolute;top:20px;left:22px;z-index:2;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.12em;background:#15211a85;border:1px solid #ffffff40;padding:5px 9px;border-radius:2px;color:#fff}
+.lighting-moments .moment-caption{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:2}
+.lighting-moments .moment-caption p{font-size:9px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:#e3e8dc;margin:0 0 10px}
+.lighting-moments .moment-caption h3{font-size:clamp(25px,2.45vw,34px);font-weight:500;letter-spacing:-.035em;line-height:1.1;color:#fff;margin:0 0 18px;max-width:11ch}
+.lighting-moments .moment-explore{display:inline-block;font-size:10px;letter-spacing:.07em;line-height:1.8;border-bottom:1px solid #ffffff80;color:#fff}
+.lighting-moments .moment-link:hover img{transform:scale(1.035)}
+.lighting-moments .moment-link:hover{box-shadow:0 16px 30px #17201e22}
+.lighting-moments .moment-link:focus-visible{outline:3px solid var(--brand-olive);outline-offset:5px}
+.lighting-moments .moments-meta{display:flex;align-items:center;gap:24px;padding-top:12px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lighting-moments .moments-progress{flex:1;height:1px;background:var(--line);position:relative;overflow:hidden}
+.lighting-moments .moments-progress>span{position:absolute;inset:0;background:var(--brand-olive);transform:scaleX(var(--moment-progress,.1111));transform-origin:left}
+.lighting-moments .moments-index{font-variant-numeric:tabular-nums;color:var(--brand-ink);min-width:54px;text-align:right}
+.lighting-moments .moments-index>span{color:var(--muted);margin-left:8px}
+.lighting-moments .moments-end{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:30px;margin-top:24px;border-top:1px solid var(--line);scroll-margin-top:110px}
+.lighting-moments .moments-end p{margin:0;color:var(--muted);font-size:14px}
+/* Sticky enhancement uses normal page scrolling; no wheel interception or library. */
+@media(min-width:768px) and (min-height:600px) and (prefers-reduced-motion:no-preference){
+ .lighting-moments{--moment-width:min(clamp(248px,27vw,360px),calc((100svh - 250px)*.75))}
+ .lighting-moments.is-scroll-gallery .moments-runway{height:var(--moment-runway)}
+ .lighting-moments.is-scroll-gallery .moments-pin{position:sticky;top:92px;padding-block:14px 24px}
+ .lighting-moments.is-scroll-gallery .moments-viewport{overflow:clip;scroll-snap-type:none}
+ .lighting-moments.is-scroll-gallery .moments-track{will-change:transform}
+ .lighting-moments.is-scroll-gallery .moment-card{will-change:transform}
+}
+@media(max-width:1024px){.lighting-moments{--moment-width:min(clamp(248px,32vw,320px),calc((100svh - 250px)*.75));--moment-gap:14px}.lighting-moments .moments-intro{gap:24px 32px}.lighting-moments .moment-caption{padding:22px}.lighting-moments .moment-caption h3{font-size:29px}}
+@media(max-width:767px){
+ .lighting-moments{--moment-width:min(76vw,340px);--moment-gap:14px;padding-block:42px 32px}
+ .lighting-moments .moments-intro{grid-template-columns:1fr;gap:16px;margin-bottom:12px}
+ .lighting-moments .moments-intro h2{font-size:34px;max-width:350px}
+ .lighting-moments .moments-intro>p{font-size:14px;max-width:52ch}
+ .lighting-moments .moments-track{padding-block:14px 24px}
+ .lighting-moments .moments-meta{gap:16px;padding-top:10px;font-size:9px}
+ .lighting-moments .moments-end{align-items:start;flex-direction:column;gap:12px;padding-top:24px;margin-top:24px}
+ .lighting-moments .moments-end .text-link{font-size:10px;max-width:100%;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.lighting-moments .moment-link,.lighting-moments .moment-link img{transition:none}.lighting-moments .moment-link:hover img{transform:none}.lighting-moments .moments-viewport{scroll-snap-type:none;scroll-behavior:auto}}

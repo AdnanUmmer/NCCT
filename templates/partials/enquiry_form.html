@@ -1,0 +1,10 @@
+  <form action="{% url 'enquiry' %}" method="post" id="enquiry-form">
+    {% csrf_token %}{{ form.token }}
+    <div class="honeypot" aria-hidden="true"><label for="id_website">Leave this field empty</label>{{ form.website }}</div>
+    <div class="form-errors" id="form-errors" role="alert" tabindex="-1">{% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}</div>
+    <div class="form-grid">{% for field in form.visible_fields %}{% if field.name != 'website' and field.name != 'consent' %}<div class="field {% if field.name == 'message' or field.name == 'project_type' %}field-wide{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <span aria-hidden="true">*</span>{% endif %}</label>{{ field }}<span class="field-error" id="error-{{ field.name }}">{% for error in field.errors %}{{ error }}{% endfor %}</span></div>{% endif %}{% endfor %}</div>
+    <div class="consent-field">{{ form.consent }}<label for="id_consent">{{ form.consent.label }}</label></div><span class="field-error" id="error-consent">{{ form.consent.errors|striptags }}</span>
+    <p class="form-note">Your details are saved securely for the NCCT team to review this enquiry.</p>
+    <button class="button button-navy submit-button" type="submit">Send enquiry </button><p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="enquiry-success" hidden tabindex="-1"><span class="success-mark" aria-hidden="true">✓</span><h3>A brighter start.</h3><p>Thank you. Your enquiry has been received.<br>The NCCT team can now review your project.</p>{% if not inline_enquiry %}<button class="button button-navy" type="button" data-close>Continue browsing</button>{% endif %}</div>

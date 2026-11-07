@@ -1,0 +1,46 @@
+{% if items %}
+<section class="about-project-slider full-bleed" id="{{ gallery_id }}" aria-labelledby="{{ gallery_id }}-title" data-about-project-slider>
+  <header class="container about-project-intro">
+    <div>
+      <p class="eyebrow">SELECTED PROJECTS &amp; REFERENCES</p>
+      <h2 id="{{ gallery_id }}-title">Light in Context.</h2>
+    </div>
+    <p>Explore selected lighting references and discover how illumination shapes architectural spaces.</p>
+  </header>
+  <div class="about-project-viewport" role="region" aria-label="Selected projects and lighting references" tabindex="0" data-slider-viewport>
+    <ul class="about-project-track" data-slider-track>
+      {% for item in items %}
+      <li class="about-project-slide" data-slider-slide aria-roledescription="slide" aria-label="{{ forloop.counter }} of {{ items|length }}">
+        <a class="about-project-link" href="{{ item.get_absolute_url }}" aria-label="{{ item.title }} — {{ item.application }}; {% if item.attribution_verified %}Explore project{% else %}View lighting reference{% endif %}">
+          <img src="{{ item.image_small_url }}" alt="{{ item.image_alt|default:item.title }}" width="1200" height="750" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" draggable="false">
+          <span class="about-project-caption">
+            <span class="about-project-category">{% if item.attribution_verified %}Delivered project{% else %}Lighting reference{% endif %} <span aria-hidden="true">/</span> {{ item.application }}</span>
+            <span class="about-project-title">{{ item.title }}</span>
+            <span class="about-project-action">{% if item.attribution_verified %}Explore project{% else %}View reference{% endif %}</span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="container about-project-footer">
+    <div class="about-project-controls">
+      <span class="about-project-count" aria-live="polite"><span data-slider-current>01</span><span aria-hidden="true"> / {{ items|length|stringformat:'02d' }}</span></span>
+      <div class="about-project-progress" role="progressbar" aria-label="Project slide progress" aria-valuemin="1" aria-valuemax="{{ items|length }}" aria-valuenow="1" data-slider-progress>
+        <span data-slider-progress-fill></span>
+      </div>
+      <div class="about-project-arrows">
+        <button type="button" class="about-project-arrow" data-slider-prev aria-label="Previous project" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+        </button>
+        <button type="button" class="about-project-arrow" data-slider-next aria-label="Next project">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <a class="about-project-all" href="{{ all_url }}">View All Projects
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+{% endif %}

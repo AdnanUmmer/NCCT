@@ -1,0 +1,38 @@
+{
+  "indus_p1": {
+    "path": "images/products-isolated/indus_p1.png",
+    "source_sha256": "e08467ca47f5139d79ce51bc7e95ddae60029c8d6f93a7929f5810063e97af1b"
+  },
+  "zoomled-bl1": {
+    "path": "images/products-isolated/zoomled-bl1.png",
+    "source_sha256": "3a8dc19719367b324419940eb837d364610405a56eed8495760b198d6f85c955"
+  },
+  "zoomled-el8-el2": {
+    "path": "images/products-isolated/zoomled-el8-el2.png",
+    "source_sha256": "8d6d5abc5bdd4ac0189aba3427333fb63d65df6f8ff2d70632124124b741130a"
+  },
+  "zoomled-el12a": {
+    "path": "images/products-isolated/zoomled-el12a.png",
+    "source_sha256": "c6d9d6d8bfe5ad86af605d581b5e901987e45c13a6f764073e76a58774be6697"
+  },
+  "zoomled-l6-l10": {
+    "path": "images/products-isolated/zoomled-l6-l10.png",
+    "source_sha256": "c6f60f7370f2d6e8caebb11ffa293f245c256c5df47e09b9439be352dc6a227a"
+  },
+  "zoomled-l15": {
+    "path": "images/products-isolated/zoomled-l15.png",
+    "source_sha256": "6a6d29d79fb1d2930ef62a73d5ea1cecc25eca408993240ed168b56625775bdb"
+  },
+  "indus_p6": {
+    "path": "images/products-isolated/indus_p6.png",
+    "source_sha256": "b4d186781c825fa6367267b59ff3e4a01cdc4a2dc089ee306edd33c67c92817d"
+  },
+  "prof_p3": {
+    "path": "images/products-isolated/prof_p3.png",
+    "source_sha256": "d2b075da64c1c404cff5c3961b805a3d7a614e00b0b36ad408ba87f717b6f40b"
+  },
+  "prof_p4": {
+    "path": "images/products-isolated/prof_p4.png",
+    "source_sha256": "905192e8547e6b94f64fd44ea19b514b3442945adbbb6dcb87a2ad6924db35da"
+  }
+}

@@ -41,6 +41,12 @@ class CmsTests(TestCase):
         html = self.client.get('/').content.decode()
         self.assertIn('A brand new heading', html)
         self.assertIn('See our work', html)
+        self.assertIn('<meta charset="UTF-8">', html)
+        self.assertIn('Read the guide <svg class="link-chevron"', html)
+        self.assertIn('Browse documents <svg class="link-chevron"', html)
+        self.assertNotIn('\u00e2\u2020\u2014', html)
+        self.assertNotIn('\u00e2\u2020\u2019', html)
+        self.assertNotIn('\u00c2', html)
         self.assertNotIn('Discover solutions', html)
 
     def test_noindex_and_sitemap_exclusion(self):

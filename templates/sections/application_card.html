@@ -1,0 +1,7 @@
+<article class="application-tile">
+{% if application.url %}<a href="{{ application.url }}" class="application-tile-link">{% endif %}
+<div class="application-tile-top"><span>{{ number|stringformat:'02d' }}</span>{% if application.url %}<span class="application-arrow" aria-hidden="true">{% include 'partials/chevron.html' %}</span>{% endif %}</div>
+<h3>{% if number == 1 %}Residential Spaces{% elif number == 2 %}Offices &amp; Commercial Buildings{% elif number == 3 %}Hospitality, Restaurants &amp; Cafés{% elif number == 4 %}Retail, Exhibitions &amp; Displays{% elif number == 5 %}Façades, Gardens &amp; Landscapes{% elif number == 6 %}Public &amp; Circulation Spaces{% elif number == 7 %}Industrial &amp; Warehouse Spaces{% else %}{{ application.title }}{% endif %}</h3>
+<p>{{ application.text }}</p>
+{% if application.url %}</a>{% endif %}
+</article>

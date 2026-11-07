@@ -6,7 +6,6 @@ PAGE_DEFAULTS = {
         seo_title='Lighting products', seo_description='Discover NCCT lighting by category, model and technical characteristics. Browse product details and download available datasheets.'),
     'projects': dict(eyebrow='Light & architecture', heading='Projects *in light.*',
         intro='A showcase of the interior, outdoor and landscape settings NCCT lighting is designed for. Each story shows how light shapes a space.',
-        notice='“Lighting reference” stories use imagery from the NCCT image library to illustrate the settings our lighting suits. They do not name clients or claim delivery of a specific commission. Delivered projects are marked as such once confirmed.',
         cta_eyebrow='Your next project', cta_heading='Let’s bring your space to light.', cta_text='Start a project enquiry',
         seo_title='Projects', seo_description='Explore NCCT lighting project showcases across interior, outdoor and landscape lighting, and discuss your project requirements with our team.'),
     'resources': dict(eyebrow='For architects & specifiers', heading='Resources & downloads',

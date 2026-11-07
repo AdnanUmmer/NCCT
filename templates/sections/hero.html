@@ -1,12 +1,20 @@
 {% load static %}
-<section class="hero" id="home" aria-labelledby="hero-heading">
-  <picture class="hero-media">{% if not content.image and content.static_image == 'hero' %}<source media="(max-width: 600px)" srcset="{% static 'images/hero-mobile.webp' %}">{% else %}<source media="(max-width: 600px)" srcset="{{ content.image_small_url }}">{% endif %}<img src="{{ content.image_url }}" alt="{{ content.image_alt }}" width="1920" height="819" fetchpriority="high"></picture>
-  <div class="hero-shade"></div>
+<section class="hero architectural-hero" id="home" aria-labelledby="hero-heading">
+  <picture class="hero-media">
+    <source media="(max-width:600px)" srcset="{% static 'images/ncct-architecture-hero-mobile.webp' %}" width="650" height="941">
+    <img src="{% static 'images/ncct-architecture-hero.webp' %}" srcset="{% static 'images/ncct-architecture-hero-1200.webp' %} 1200w, {% static 'images/ncct-architecture-hero.webp' %} 1672w" sizes="100vw" alt="Conceptual architectural courtyard with integrated lighting, a reflecting pool and a glass entrance" width="1672" height="941" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero-shade" aria-hidden="true"></div>
   <div class="hero-content container">
-    <p class="eyebrow hero-eyebrow"><span class="gold-rule"></span>{{ content.hero_eyebrow }}</p>
+    <p class="eyebrow hero-eyebrow">ARCHITECTURAL LIGHTING</p>
+    {% if editorial_hero %}
+    <h1 id="hero-heading"><span>LIGHT</span><span>SHAPES SPACE<span class="hero-period">.</span></span></h1>
+    <p class="hero-copy">Architectural lighting solutions that bring spaces to life—enhancing form, material, and human experience with precision and purpose.</p>
+    <div class="hero-actions"><a class="button hero-primary" href="{% url 'solutions' %}">Explore Solutions</a><a class="button hero-secondary" href="{% url 'projects' %}">View Projects</a></div>
+    {% else %}
     <h1 id="hero-heading">{{ content.hero_heading|linebreaksbr }}</h1>
     <p class="hero-copy">{{ content.hero_copy|linebreaksbr }}</p>
-    <div class="hero-actions">{% if content.hero_cta_text %}<a class="button button-light" href="{{ content.hero_cta_link }}">{{ content.hero_cta_text }} </a>{% endif %}{% if content.hero_secondary_text %}<a class="text-link light" href="{{ content.hero_secondary_link }}">{{ content.hero_secondary_text }} </a>{% endif %}</div>
+    <div class="hero-actions">{% if content.hero_cta_text %}<a class="button hero-primary" href="{{ content.hero_cta_link }}">{{ content.hero_cta_text }}</a>{% endif %}{% if content.hero_secondary_text %}<a class="button hero-secondary" href="{{ content.hero_secondary_link }}">{{ content.hero_secondary_text }}</a>{% endif %}</div>
+    {% endif %}
   </div>
-  <div class="hero-bottom container"><a class="scroll-link eyebrow" href="#about"> Scroll to discover</a><span class="hero-caption">{{ content.hero_caption }}</span><span class="hero-index"><b>01</b> <span>/</span> NCCT</span></div>
 </section>

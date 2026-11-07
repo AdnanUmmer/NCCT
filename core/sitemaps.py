@@ -5,6 +5,8 @@ from io import StringIO
 from .models import ContentPage, Application, PageContent
 from .catalogue import public_products, public_projects
 from products.models import Category
+from .editorial import GUIDES
+from .application_content import APPLICATION_PAGES
 
 
 def sitemap(request):
@@ -12,7 +14,8 @@ def sitemap(request):
     xml = SimplerXMLGenerator(output, 'utf-8')
     xml.startDocument()
     xml.startElement('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
-    paths = [('/', None)]
+    paths = [('/', None)] + [(f"/resources/guides/{g['slug']}/", None) for g in GUIDES]
+    paths += [(f"/applications/{a['slug']}/", None) for a in APPLICATION_PAGES]
     keys = {'products': '/products/', 'solutions': '/solutions/', 'resources': '/resources/', 'contact': '/contact/', 'projects': '/projects/'}
     hidden = set(PageContent.objects.filter(noindex=True).values_list('key', flat=True))
     for key, path in keys.items():

@@ -171,11 +171,28 @@ class CatalogueTests(TestCase):
         call_command('import_ncct_content', verbosity=0)
         self.assertEqual(Product.objects.count(), 61)
         html = self.client.get('/products/led-lighting/').content.decode()
-        self.assertIn('class="category-nav"', html)
+        self.assertIn('class="catalogue-collections"', html)
         self.assertIn('aria-current="page" class="is-active"', html)
         self.assertEqual(self.client.get('/en/Real/Led_lights.html').status_code, 301)
         projects = self.client.get('/projects/')
         self.assertContains(projects, 'Lighting reference')
         self.assertNotContains(projects, 'Delivered project</span>')
         self.assertContains(self.client.get(Project.objects.first().get_absolute_url()), 'Reference story')
-        self.assertContains(self.client.get('/about/'), 'about-hero')
+        self.assertContains(self.client.get('/about/'), 'about-opening')
+
+    def test_public_pages_use_the_shared_full_width_shell(self):
+        paths = [
+            '/about/', '/products/', '/products/led-lighting/', '/solutions/',
+            '/projects/', '/resources/', '/contact/',
+            '/resources/guides/technical-specifications/',
+        ]
+        for path in paths:
+            response = self.client.get(path)
+            self.assertEqual(response.status_code, 200, path)
+            html = response.content.decode()
+            self.assertIn('class="catalogue-main', html, path)
+            self.assertNotIn('class="catalogue-main container', html, path)
+            self.assertIn('css/page-shell.css', html, path)
+
+        self.assertContains(self.client.get('/about/'), 'lighting-moments full-bleed')
+        self.assertContains(self.client.get('/resources/'), 'resource-downloads full-bleed')
